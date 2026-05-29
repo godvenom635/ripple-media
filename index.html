@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ripple Media — 100X Your Online Visibility</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #050507;
+      --black2:  #09090c;
+      --navy:    #060910;
+      --card:    #0d0d10;
+      --border:  #181820;
+      --white:   #ffffff;
+      --muted:   #66667a;
+      /* Ripple brand — warm gold / amber */
+      --g1: #f59e0b;
+      --g2: #f97316;
+      --g3: #fcd34d;
+      --grad:      linear-gradient(120deg, #fcd34d 0%, #f59e0b 50%, #d97706 100%);
+      --grad-text: linear-gradient(120deg, #fef3c7 0%, #fcd34d 35%, #f59e0b 100%);
+      --grad-rev:  linear-gradient(120deg, #d97706 0%, #f59e0b 55%, #fcd34d 100%);
+      --pill-bg: #0d0d12;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: #222235; border-radius: 3px; }
+
+    /* ─── SHARED GRADIENT UTILS ─────────────────────── */
+    .grad-text {
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ─── ANIMATED GRID LINES ───────────────────────── */
+    @keyframes gridDrift {
+      0%   { background-position: 0 0; }
+      100% { background-position: 80px 80px; }
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(245,158,11,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(245,158,11,0.04) 1px, transparent 1px);
+      background-size: 80px 80px;
+      animation: gridDrift 14s linear infinite;
+      pointer-events: none;
+    }
+
+    /* ─── NAVBAR ────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 64px;
+      background: rgba(6,6,8,0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    /* gradient accent line under nav */
+    nav::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(245,158,11,0.06) 20%, rgba(245,158,11,0.42) 50%, rgba(245,158,11,0.06) 80%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .nav-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 23px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      text-decoration: none;
+      background: linear-gradient(110deg, #fef3c7 0%, #fcd34d 45%, #f59e0b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 7px rgba(245,158,11,0.18));
+      transition: filter 0.25s;
+    }
+    .nav-logo:hover { filter: drop-shadow(0 0 12px rgba(245,158,11,0.38)); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    .btn-nav {
+      background: var(--white);
+      color: var(--black);
+      border: none;
+      padding: 10px 22px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s, box-shadow 0.2s;
+      box-shadow: 0 0 12px rgba(245,158,11,0.12);
+    }
+    .btn-nav:hover { opacity: 0.9; box-shadow: 0 0 20px rgba(245,158,11,0.28); }
+
+    /* ─── PILL ──────────────────────────────────────── */
+    .pill-left {
+      padding: 12px 22px;
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.65);
+      white-space: nowrap;
+    }
+
+    .pill-right {
+      background: var(--white);
+      color: var(--black);
+      padding: 12px 22px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .pill-right:hover { opacity: 0.88; }
+
+    /* ─── HERO ──────────────────────────────────────── */
+    .hero {
+      padding: 150px 40px 100px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ambient glow orbs behind headline */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 80px; left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 500px;
+      background: radial-gradient(ellipse at center,
+        rgba(245,158,11,0.09) 0%,
+        rgba(249,115,22,0.06) 45%,
+        transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 1000px;
+      height: 300px;
+      background: radial-gradient(ellipse at center,
+        rgba(245,158,11,0.04) 0%,
+        transparent 70%);
+      pointer-events: none;
+    }
+
+    /* hero content above the grid */
+    .hero-headline,
+    .trust-pill,
+    .vsl-wrap {
+      position: relative;
+    }
+
+    .hero-headline {
+      font-size: clamp(56px, 7.8vw, 104px);
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -3.5px;
+      color: var(--white);
+      margin-bottom: 36px;
+    }
+
+    .hero-headline .highlight {
+      display: inline-block;
+      position: relative;
+      background: var(--grad);
+      border-radius: 10px;
+      padding: 4px 18px 8px;
+      color: var(--white);
+      -webkit-text-fill-color: var(--white);
+      box-shadow: 0 0 20px rgba(245,158,11,0.38), 0 0 48px rgba(249,115,22,0.1);
+    }
+
+    .trust-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(245,158,11,0.18);
+      border-radius: 999px;
+      padding: 8px 22px 8px 10px;
+      margin-bottom: 52px;
+      box-shadow: 0 0 14px rgba(245,158,11,0.05);
+    }
+
+    .avatars { display: flex; align-items: center; }
+
+    .avatar-circle {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 2px solid var(--black);
+      background: var(--grad);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: #050507;
+      margin-left: -8px;
+    }
+    .avatar-circle:first-child { margin-left: 0; }
+
+    .trust-text .label { font-size: 13px; font-weight: 600; color: var(--white); }
+
+    .stars-row {
+      display: flex; align-items: center; gap: 4px;
+      font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 1px;
+    }
+    .stars-row .s { color: #f59e0b; }
+
+    .vsl-wrap {
+      max-width: 840px;
+      margin: 0 auto;
+      border-radius: 18px;
+      overflow: hidden;
+      aspect-ratio: 16/9;
+      display: flex; align-items: center; justify-content: center;
+      /* gradient border */
+      background: linear-gradient(135deg, rgba(245,158,11,0.42), rgba(249,115,22,0.1), rgba(251,191,36,0.22));
+      padding: 1.5px;
+      box-shadow: 0 0 28px rgba(245,158,11,0.1), 0 0 55px rgba(249,115,22,0.06);
+    }
+
+    .vsl-inner-wrap {
+      width: 100%; height: 100%;
+      background: #0a0a12;
+      border-radius: 17px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .vsl-inner { text-align: center; }
+
+    .play-circle {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: rgba(245,158,11,0.1);
+      border: 2px solid rgba(245,158,11,0.32);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 14px;
+      box-shadow: 0 0 12px rgba(245,158,11,0.14);
+    }
+
+    .play-triangle {
+      width: 0; height: 0;
+      border-style: solid;
+      border-width: 10px 0 10px 18px;
+      border-color: transparent transparent transparent rgba(255,255,255,0.85);
+      margin-left: 4px;
+    }
+
+    .vsl-inner p { font-size: 13px; color: var(--muted); }
+
+    /* ─── GRADIENT DIVIDER ──────────────────────────── */
+    .grad-line {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(245,158,11,0.06) 18%, rgba(245,158,11,0.55) 50%, rgba(245,158,11,0.06) 82%, transparent 100%);
+    }
+
+    /* ─── CENTERED PILL ROW ─────────────────────────── */
+    .pill-row {
+      display: flex; justify-content: center;
+      padding: 48px 40px;
+    }
+
+    .inline-pill {
+      display: inline-flex; align-items: center;
+      background: var(--pill-bg);
+      border-radius: 999px; overflow: hidden;
+      box-shadow:
+        0 0 0 1px rgba(245,158,11,0.26),
+        0 8px 32px rgba(0,0,0,0.6);
+    }
+
+    /* ─── BEFORE vs AFTER ───────────────────────────── */
+    #before-after {
+      padding: 100px 40px;
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #before-after::before {
+      content: '';
+      position: absolute;
+      top: -200px; left: 50%;
+      transform: translateX(-50%);
+      width: 900px; height: 600px;
+      background: radial-gradient(ellipse at center,
+        rgba(245,158,11,0.07) 0%,
+        transparent 65%);
+      pointer-events: none;
+    }
+
+    .ba-h {
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .ba-h .vs {
+      font-size: 0.44em; font-weight: 400; color: var(--muted);
+      margin: 0 10px; vertical-align: middle;
+    }
+
+    .ba-h .after-w {
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .ba-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .ba-card {
+      background: var(--card);
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .ba-card:hover {
+      border-color: rgba(245,158,11,0.22);
+      box-shadow: 0 0 16px rgba(245,158,11,0.07);
+    }
+
+    .ba-vid {
+      width: 100%; aspect-ratio: 16/9;
+      background: linear-gradient(160deg, #0e0e1c 0%, #080810 100%);
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .ba-stats { padding: 12px 14px 0; display: flex; align-items: center; }
+
+    .stat-tag {
+      display: inline-flex; align-items: center; gap: 5px;
+      border-radius: 999px; padding: 5px 12px;
+      font-size: 13px; font-weight: 700;
+    }
+    .stat-tag.red { background: rgba(239,68,68,0.1);  color: #f87171; }
+    .stat-tag.grn { background: rgba(34,197,94,0.1);  color: #4ade80; }
+
+    .ba-label { padding: 8px 14px 14px; font-size: 12px; color: var(--muted); }
+
+    /* ─── PHOTO GRID ────────────────────────────────── */
+    #photo-grid-sec {
+      padding: 100px 40px;
+      background: var(--black2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #photo-grid-sec::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 800px; height: 400px;
+      background: radial-gradient(ellipse at bottom center,
+        rgba(245,158,11,0.05) 0%,
+        transparent 65%);
+      pointer-events: none;
+    }
+
+    .pg-intro { text-align: center; margin-bottom: 56px; }
+
+    .pg-intro h2 {
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      margin-bottom: 10px;
+    }
+
+    .pg-intro p { font-size: 16px; color: var(--muted); }
+
+    .masonry {
+      max-width: 1280px; margin: 0 auto;
+      columns: 6; column-gap: 10px;
+    }
+
+    .m-item {
+      break-inside: avoid;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      overflow: hidden;
+      filter: grayscale(1);
+      background: #14141e;
+      border: 1px solid rgba(255,255,255,0.04);
+      transition: filter 0.4s;
+    }
+    .m-item:hover { filter: grayscale(0.3); }
+
+    .m-item .ph {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: linear-gradient(180deg, #1a1a28 0%, #0c0c1a 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; font-weight: 900;
+      color: rgba(255,255,255,0.06);
+      letter-spacing: -1px;
+    }
+    .m-item:nth-child(even) .ph { aspect-ratio: 3/5; }
+
+    /* ─── COMPETITOR COMPARISON ─────────────────────── */
+    #comparison {
+      padding: 100px 40px;
+      background: var(--black);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #comparison::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      width: 800px; height: 500px;
+      background: radial-gradient(ellipse,
+        rgba(245,158,11,0.04) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .comp-pretitle {
+      text-align: center;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .comp-h {
+      font-size: clamp(34px, 4.8vw, 60px);
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      text-align: center;
+      line-height: 1.05;
+      margin-bottom: 16px;
+    }
+
+    .comp-sub {
+      text-align: center;
+      font-size: 16px;
+      color: var(--muted);
+      margin-bottom: 64px;
+    }
+
+    .comp-wrapper {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 0 32px;
+      align-items: start;
+    }
+
+    .comp-side {
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .comp-side.bad  { border-color: rgba(239,68,68,0.2); background: rgba(239,68,68,0.03); }
+    .comp-side.good { background: rgba(245,158,11,0.03); border-color: rgba(245,158,11,0.18); }
+
+    .comp-header {
+      padding: 18px 24px 14px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .comp-side.bad .comp-header  { border-bottom-color: rgba(239,68,68,0.15); color: #f87171; }
+    .comp-side.good .comp-header { border-bottom-color: rgba(245,158,11,0.12); color: #fbbf24; }
+
+    .comp-dot {
+      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+    }
+    .comp-side.bad  .comp-dot { background: #f87171; }
+    .comp-side.good .comp-dot { background: #fbbf24; box-shadow: 0 0 6px rgba(245,158,11,0.5); }
+
+    /* App pills (bad side) */
+    .app-pills {
+      padding: 20px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      border-bottom: 1px solid rgba(239,68,68,0.1);
+    }
+
+    .app-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 8px;
+      padding: 7px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.5);
+      text-decoration: line-through;
+      text-decoration-color: rgba(239,68,68,0.5);
+    }
+
+    .app-pill .app-icon {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none !important;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .app-pill .app-icon svg { display: block; }
+
+    /* Points list shared */
+    .comp-points {
+      list-style: none;
+      padding: 20px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .comp-points li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .comp-side.bad  .comp-points li { color: rgba(255,255,255,0.45); }
+    .comp-side.good .comp-points li { color: rgba(255,255,255,0.8); }
+
+    .pt-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+
+    /* VS divider */
+    .comp-vs {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding-top: 60px;
+    }
+
+    .vs-circle {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: var(--card);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    /* Savings badge */
+    .savings-badge {
+      margin: 0 24px 24px;
+      padding: 16px 20px;
+      background: linear-gradient(120deg, rgba(245,158,11,0.1) 0%, rgba(249,115,22,0.1) 100%);
+      border: 1px solid rgba(245,158,11,0.2);
+      border-radius: 14px;
+      text-align: center;
+    }
+
+    .savings-number {
+      font-size: 36px;
+      font-weight: 900;
+      letter-spacing: -1px;
+      background: var(--grad-text);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .savings-label {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    @media (max-width: 860px) {
+      .comp-wrapper { grid-template-columns: 1fr; }
+      .comp-vs { flex-direction: row; padding: 0; }
+    }
+
+    /* ─── FAQ ───────────────────────────────────────── */
+    #faq {
+      padding: 100px 40px;
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #faq::before {
+      content: '';
+      position: absolute;
+      top: 0; right: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(ellipse,
+        rgba(245,158,11,0.05) 0%,
+        transparent 65%);
+      pointer-events: none;
+    }
+
+    .faq-wrap { max-width: 1100px; margin: 0 auto; position: relative; }
+
+    .faq-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 48px;
+    }
+
+    details.faq-item {
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    details[open].faq-item {
+      border-bottom-color: rgba(245,158,11,0.2);
+    }
+
+    summary.faq-q {
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 14px;
+      padding: 20px 0;
+      font-size: 15px; font-weight: 600;
+      color: rgba(255,255,255,0.8);
+      cursor: pointer; list-style: none;
+      user-select: none;
+      transition: color 0.2s;
+    }
+    summary.faq-q::-webkit-details-marker { display: none; }
+    details[open] summary.faq-q { color: var(--white); }
+
+    .faq-icon {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 18px; font-weight: 300;
+      transition: transform 0.3s ease, background 0.3s, border-color 0.3s;
+      color: rgba(255,255,255,0.6);
+    }
+
+    details[open] .faq-icon {
+      transform: rotate(45deg);
+      background: rgba(245,158,11,0.12);
+      border-color: rgba(245,158,11,0.35);
+      color: #fbbf24;
+    }
+
+    .faq-a {
+      padding: 0 0 20px;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .faq-highlight {
+      color: rgba(255,255,255,0.75);
+      font-weight: 600;
+    }
+
+    /* ─── SECTION HEADING SHARED ────────────────────── */
+    .section-h {
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      text-align: center;
+      line-height: 1.05;
+      margin-bottom: 60px;
+    }
+
+    /* ─── FINAL CTA ─────────────────────────────────── */
+    #final-cta {
+      padding: 140px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      background: var(--black);
+    }
+
+    /* big gradient orb behind text */
+    #final-cta::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      width: 900px; height: 600px;
+      background: radial-gradient(ellipse at center,
+        rgba(245,158,11,0.1) 0%,
+        rgba(249,115,22,0.07) 40%,
+        transparent 70%);
+      pointer-events: none;
+    }
+
+    .phone-l, .phone-r {
+      position: absolute; bottom: -20px; width: 180px; opacity: 0.4;
+    }
+    .phone-l { left: 7%; transform: rotate(-14deg); }
+    .phone-r { right: 7%; transform: rotate(14deg); }
+
+    .phone-shape {
+      width: 150px; height: 290px;
+      background: linear-gradient(160deg, #14141e 0%, #0a0a12 100%);
+      border: 1.5px solid rgba(245,158,11,0.14);
+      border-radius: 28px;
+      margin: 0 auto;
+      box-shadow: 0 0 14px rgba(245,158,11,0.05);
+    }
+
+    .final-pre { font-size: 16px; color: var(--muted); margin-bottom: 10px; position: relative; }
+
+    .final-h {
+      font-size: clamp(52px, 8.5vw, 114px);
+      font-weight: 900;
+      letter-spacing: -3.5px;
+      line-height: 1.0;
+      color: var(--white);
+      margin-bottom: 44px;
+      position: relative;
+    }
+
+    /* ─── FOOTER ────────────────────────────────────── */
+    footer {
+      background: var(--black);
+      padding: 32px 48px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      position: relative;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(245,158,11,0.06) 18%, rgba(245,158,11,0.42) 50%, rgba(245,158,11,0.06) 82%, transparent 100%);
+    }
+
+    .ft-inner { max-width: 1280px; margin: 0 auto; }
+
+    .ft-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 20px;
+      background: linear-gradient(110deg, #fef3c7 0%, #fcd34d 45%, #f59e0b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 6px rgba(245,158,11,0.14));
+    }
+
+    .ft-bottom {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .ft-copy { font-size: 13px; color: var(--muted); }
+
+    .ft-socials { display: flex; align-items: center; gap: 12px; }
+
+    .ft-socials a {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(245,158,11,0.14);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .ft-socials a:hover {
+      background: rgba(245,158,11,0.1);
+      border-color: rgba(245,158,11,0.4);
+      color: var(--white);
+      box-shadow: 0 0 8px rgba(245,158,11,0.14);
+    }
+
+    /* ─── PLAY BUTTON ───────────────────────────────── */
+    .play-btn {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: rgba(245,158,11,0.08);
+      border: 2px solid rgba(245,158,11,0.24);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(245,158,11,0.08);
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .play-btn:hover {
+      background: rgba(245,158,11,0.14);
+      box-shadow: 0 0 16px rgba(245,158,11,0.18);
+    }
+
+    .tri {
+      width: 0; height: 0;
+      border-style: solid;
+      border-width: 9px 0 9px 16px;
+      border-color: transparent transparent transparent rgba(255,255,255,0.9);
+      margin-left: 3px;
+    }
+
+    /* ─── RESPONSIVE ────────────────────────────────── */
+    @media (max-width: 960px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .ba-grid { grid-template-columns: repeat(2, 1fr); }
+      .masonry { columns: 3; }
+      .faq-cols { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .hero { padding: 100px 20px 60px; }
+      .hero-headline { letter-spacing: -2px; }
+      .ba-grid { grid-template-columns: 1fr; }
+      .masonry { columns: 2; }
+      .phone-l, .phone-r { display: none; }
+      .faq-cols { gap: 0; }
+      #before-after, #photo-grid-sec, #comparison, #faq, #final-cta { padding-left: 20px; padding-right: 20px; }
+      .inline-pill { max-width: calc(100vw - 48px); }
+      .pill-left, .pill-right { padding: 11px 16px; font-size: 13px; }
+    }
+
+    /* ─── MOBILE (phones) ───────────────────────────── */
+    @media (max-width: 480px) {
+      nav { padding: 0 16px; height: 56px; }
+      .btn-nav { padding: 8px 15px; font-size: 13px; }
+
+      .hero { padding: 90px 16px 56px; }
+      .hero-headline { font-size: clamp(38px, 11.5vw, 64px); letter-spacing: -1.5px; margin-bottom: 28px; }
+      .hero-headline .highlight { padding: 3px 12px 7px; border-radius: 8px; }
+
+      .trust-pill { padding: 6px 14px 6px 7px; gap: 8px; margin-bottom: 36px; }
+      .avatar-circle { width: 30px; height: 30px; font-size: 10px; }
+      .trust-text .label { font-size: 12px; }
+      .stars-row { font-size: 12px; }
+
+      .pill-row { padding: 32px 16px; }
+      .inline-pill { max-width: calc(100vw - 32px); }
+      .pill-left { padding: 10px 14px; font-size: 13px; white-space: normal; text-align: center; }
+      .pill-right { padding: 10px 14px; font-size: 13px; }
+
+      #before-after, #photo-grid-sec, #comparison, #faq, #final-cta {
+        padding: 64px 16px;
+      }
+
+      .ba-h { font-size: clamp(28px, 9vw, 42px); letter-spacing: -1px; }
+      .ba-h .vs { margin: 0 6px; }
+      .ba-grid { gap: 12px; }
+
+      .pg-intro h2 { font-size: clamp(28px, 9vw, 42px); letter-spacing: -1px; }
+
+      .comp-h { font-size: clamp(26px, 8.5vw, 40px); letter-spacing: -1px; }
+      .comp-sub { font-size: 14px; margin-bottom: 36px; }
+      .comp-wrapper { gap: 16px 0; }
+      .comp-header { padding: 14px 18px 12px; }
+      .app-pills { padding: 14px 18px; gap: 6px; }
+      .comp-points { padding: 14px 18px 18px; gap: 10px; }
+      .comp-points li { font-size: 13px; }
+      .savings-badge { margin: 0 18px 18px; padding: 14px 16px; }
+      .savings-number { font-size: 30px; }
+
+      .section-h { font-size: clamp(28px, 9vw, 42px); letter-spacing: -1px; }
+      summary.faq-q { font-size: 14px; padding: 16px 0; }
+      .faq-a { font-size: 13px; }
+
+      .final-h { font-size: clamp(38px, 11vw, 64px); letter-spacing: -2px; margin-bottom: 32px; }
+      .final-pre { font-size: 14px; }
+
+      footer { padding: 24px 16px; }
+      .ft-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .masonry { columns: 2; column-gap: 6px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">ripple.</a>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#before-after">Client Results</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a href="YOUR_CALENDLY_LINK" target="_blank" class="btn-nav">Book a Call</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-grid" aria-hidden="true"></div>
+
+    <h1 class="hero-headline">
+      100X Your<br>
+      <span class="highlight">Online Visibility.</span>
+    </h1>
+
+    <div class="trust-pill">
+      <div class="avatars">
+        <div class="avatar-circle">AR</div>
+        <div class="avatar-circle">MW</div>
+        <div class="avatar-circle">JP</div>
+        <div class="avatar-circle">KL</div>
+        <div class="avatar-circle">ST</div>
+      </div>
+      <div class="trust-text">
+        <div class="label">Trusted by 50+ Founders</div>
+        <div class="stars-row">
+          <span class="s">★★★★★</span>
+          &nbsp;4.9/5
+        </div>
+      </div>
+    </div>
+
+    <!-- Replace with your actual VSL embed code when ready -->
+    <div class="vsl-wrap">
+      <div class="vsl-inner-wrap">
+        <div class="vsl-inner">
+          <div class="play-circle">
+            <div class="play-triangle"></div>
+          </div>
+          <p>Your VSL video goes here</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="grad-line"></div>
+
+  <!-- POST-VSL SCARCITY -->
+  <div class="pill-row">
+    <div class="inline-pill">
+      <span class="pill-left">12/20 Spots Remaining</span>
+      <a href="YOUR_CALENDLY_LINK" target="_blank" class="pill-right">Book a Call</a>
+    </div>
+  </div>
+
+  <!-- BEFORE vs AFTER -->
+  <section id="before-after">
+    <h2 class="ba-h">Before <span class="vs">vs</span> <span class="after-w">With Ripple</span></h2>
+
+    <div class="ba-grid">
+      <div class="ba-card">
+        <div class="ba-vid"><div class="play-btn"><div class="tri"></div></div></div>
+        <div class="ba-stats"><span class="stat-tag red">↓ 4.2K Views</span></div>
+        <div class="ba-label">Before — posting alone to one account</div>
+      </div>
+      <div class="ba-card">
+        <div class="ba-vid"><div class="play-btn"><div class="tri"></div></div></div>
+        <div class="ba-stats"><span class="stat-tag grn">↑ 18,400,000 Views</span></div>
+        <div class="ba-label">After Ripple — same content, 100x the reach</div>
+      </div>
+      <div class="ba-card">
+        <div class="ba-vid"><div class="play-btn"><div class="tri"></div></div></div>
+        <div class="ba-stats"><span class="stat-tag grn">↑ 7,200,000 Views</span></div>
+        <div class="ba-label">After Ripple — new audiences, zero extra work</div>
+      </div>
+    </div>
+
+    <div class="pill-row" style="padding-top:56px;">
+      <div class="inline-pill">
+        <span class="pill-left">12/20 Spots Remaining</span>
+        <a href="YOUR_CALENDLY_LINK" target="_blank" class="pill-right">Book a Call</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUILT ON RESULTS / PHOTO GRID -->
+  <section id="photo-grid-sec">
+    <div class="pg-intro">
+      <h2>Built On Results.</h2>
+      <p>Real numbers. Real founders. Real growth.</p>
+    </div>
+    <div class="masonry">
+      <!-- Replace with your actual screenshots/result images -->
+      <div class="m-item"><div class="ph">↑ Views</div></div>
+      <div class="m-item"><div class="ph">↑ Reach</div></div>
+      <div class="m-item"><div class="ph">↑ Follows</div></div>
+      <div class="m-item"><div class="ph">↑ Views</div></div>
+      <div class="m-item"><div class="ph">↑ Reach</div></div>
+      <div class="m-item"><div class="ph">↑ Follows</div></div>
+      <div class="m-item"><div class="ph">↑ Views</div></div>
+      <div class="m-item"><div class="ph">↑ Reach</div></div>
+      <div class="m-item"><div class="ph">↑ Follows</div></div>
+      <div class="m-item"><div class="ph">↑ Views</div></div>
+      <div class="m-item"><div class="ph">↑ Reach</div></div>
+      <div class="m-item"><div class="ph">↑ Follows</div></div>
+    </div>
+  </section>
+
+  <div class="grad-line"></div>
+
+  <!-- COMPETITOR COMPARISON -->
+  <section id="comparison">
+    <p class="comp-pretitle">The Old Way Is Over</p>
+    <h2 class="comp-h">F**k These Apps.<br>Here's What Actually Works.</h2>
+    <p class="comp-sub">Every clipping platform hands control to someone else. Ripple hands it back to you.</p>
+
+    <div class="comp-wrapper">
+
+      <!-- LEFT: Clipping apps -->
+      <div class="comp-side bad">
+        <div class="comp-header">
+          <span class="comp-dot"></span>
+          Clipping Apps &amp; Marketplaces
+        </div>
+
+        <div class="app-pills">
+
+          <!-- Whop -->
+          <div class="app-pill">
+            <span class="app-icon">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="border-radius:3px;">
+                <rect width="16" height="16" rx="3" fill="#FF4B2B"/>
+                <path d="M3 5.5L5.2 11L8 6.8L10.8 11L13 5.5" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            Whop
+          </div>
+
+          <!-- Atomik Clips -->
+          <div class="app-pill">
+            <span class="app-icon">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="border-radius:3px;">
+                <rect width="16" height="16" rx="3" fill="#111111"/>
+                <path d="M8 3.5L12 12H4L8 3.5Z" stroke="white" stroke-width="1.3" stroke-linejoin="round"/>
+                <line x1="5.4" y1="9.4" x2="10.6" y2="9.4" stroke="white" stroke-width="1.2" stroke-linecap="round"/>
+              </svg>
+            </span>
+            Atomik Clips
+          </div>
+
+          <div class="app-pill"><span class="app-icon">🎬</span> Clip Agencies</div>
+          <div class="app-pill"><span class="app-icon">👤</span> Freelance Editors</div>
+          <div class="app-pill"><span class="app-icon">📦</span> Clip Marketplaces</div>
+        </div>
+
+        <ul class="comp-points">
+          <li><span class="pt-icon">✗</span> Editor owns the page — they can delete it anytime</li>
+          <li><span class="pt-icon">✗</span> 20% of editors get 80% of results — you're in the other 80%</li>
+          <li><span class="pt-icon">✗</span> Their content dies when they pivot or quit</li>
+          <li><span class="pt-icon">✗</span> You're building someone else's asset, not yours</li>
+          <li><span class="pt-icon">✗</span> High cost, inconsistent output, zero guarantees</li>
+          <li><span class="pt-icon">✗</span> Algorithm dependency — one change wipes your reach</li>
+        </ul>
+      </div>
+
+      <!-- VS -->
+      <div class="comp-vs">
+        <div class="vs-circle">vs</div>
+      </div>
+
+      <!-- RIGHT: Ripple -->
+      <div class="comp-side good">
+        <div class="comp-header">
+          <span class="comp-dot"></span>
+          ripple. — The Distribution Layer
+        </div>
+
+        <div class="savings-badge">
+          <div class="savings-number">90x</div>
+          <div class="savings-label">More cost-effective than running a clipping operation</div>
+        </div>
+
+        <ul class="comp-points">
+          <li><span class="pt-icon">✓</span> You own 100% of your content and distribution</li>
+          <li><span class="pt-icon">✓</span> Pages are yours — no editor can delete your audience</li>
+          <li><span class="pt-icon">✓</span> Content compounds forever — it never just disappears</li>
+          <li><span class="pt-icon">✓</span> Guaranteed results or we work for free</li>
+          <li><span class="pt-icon">✓</span> Fraction of the cost, 10x the control</li>
+          <li><span class="pt-icon">✓</span> One system. Multiple platforms. Zero effort from you.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="faq-wrap">
+      <h2 class="section-h" style="margin-bottom:56px;">
+        You've Got Questions,<br>We've Got Answers.
+      </h2>
+
+      <div class="faq-cols">
+        <!-- LEFT COLUMN -->
+        <div>
+          <details class="faq-item">
+            <summary class="faq-q">Who is Ripple NOT for? <span class="faq-icon">+</span></summary>
+            <div class="faq-a">Ripple is not for founders who post sporadically. If you're not creating video content at least 3–4 times a week, distribution won't have enough material to work with. We also don't work with illegal, harmful, or NSFW content.</div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-q">What results can I expect? <span class="faq-icon">+</span></summary>
+            <div class="faq-a">Most clients see a 5×–20× increase in views per video within the first 30 days, thousands of new followers monthly, and inbound leads from audiences who've never heard of them before — all from content they've already created.</div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-q">How is Ripple different from hiring clip editors? <span class="faq-icon">+</span></summary>
+            <div class="faq-a">
+              Clipping is an <span class="faq-highlight">uncontrolled market</span> — 20% of editors capture 80% of results, while the rest produce inconsistent output. But the deeper problem is <span class="faq-highlight">control</span>: a clip editor builds their own page, and the moment they delete it, rename it, or pivot their content — your audience disappears overnight.<br><br>
+              With Ripple, <span class="faq-highlight">you own 100% of your content</span>. Our distribution infrastructure is built around your brand, not someone else's. And because we've engineered the process, we deliver comparable (often better) results at <span class="faq-highlight">10× lower cost</span> than running a full clipping operation.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-q">Why can't I just grow my own account organically? <span class="faq-icon">+</span></summary>
+            <div class="faq-a">You absolutely should — and we help you do that faster. But algorithms alone are unpredictable. Ripple adds a distribution layer on top of your organic effort, so one piece of content reaches audiences that the algorithm would never show it to. You stop depending on luck.</div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-q">Do I need a big audience to begin? <span class="faq-icon">+</span></summary>
+            <div class="faq-a">Not at all. Most of our strongest results come from founders starting near zero. What matters is that you create quality content with a clear message. Ripple handles getting that message in front of millions of new eyes.</div>
+          </details>
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div>
+          <details class="faq-item">
+            <summary class="faq-q">Won't clip editors' audiences just drift away over time? <span class="faq-icon">+</span></summary>
+            <div class="faq-a">
+              Exactly — and this is a critical insight. Clip editors only ever create <span class="faq-highlight">derivative content</span>. The moment a creator stops producing, or the editor moves on, the content dies. There's no long-term asset being built.<br><br>
+              Ripple distributes <span class="faq-highlight">your original content</span> — videos you own, messages you control. Every view compounds back into your brand, not a third-party page that could vanish tomorrow.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-q">How much time does it take from me? <span class="faq-icon">+</span></summary>
+            <div class="faq-a">Almost none. You keep creating — we handle everything else. Most clients spend fewer than 30 minutes per week on anything Ripple-related. No managing editors, no chasing deadlines, no worrying about page quality.</div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-q">What platforms do you work with? <span class="faq-icon">+</span></summary>
+            <div class="faq-a">We distribute primarily on Instagram, TikTok, and YouTube Shorts — the three highest-growth platforms for short-form content in 2026. We can expand to Facebook and X depending on your audience profile.</div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-q">Do you have a guarantee? <span class="faq-icon">+</span></summary>
+            <div class="faq-a">Yes. If you don't see a measurable increase in reach within your first 60 days, we work for free until you do. We only win when you win.</div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-q">How much does it cost? <span class="faq-icon">+</span></summary>
+            <div class="faq-a">Pricing depends on the scale of distribution you need. Book a call — spots are limited intentionally so we can maintain quality for every founder we work with.</div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section id="final-cta">
+    <div class="phone-l"><div class="phone-shape"></div></div>
+    <div class="phone-r"><div class="phone-shape"></div></div>
+
+    <p class="final-pre">Stop Posting Into the Void.</p>
+    <h2 class="final-h">Start Reaching Millions.</h2>
+
+    <div class="inline-pill" style="box-shadow: 0 0 0 1px rgba(245,158,11,0.32), 0 12px 48px rgba(0,0,0,0.8), 0 0 36px rgba(245,158,11,0.1);">
+      <span class="pill-left">12/20 Spots Remaining</span>
+      <a href="YOUR_CALENDLY_LINK" target="_blank" class="pill-right">Book a Call</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="ft-inner">
+      <a href="#" class="ft-logo">ripple.</a>
+      <div class="ft-bottom">
+        <span class="ft-copy">2026 Ripple Media. All rights reserved.</span>
+        <div class="ft-socials">
+          <a href="https://instagram.com/smmguy" target="_blank" aria-label="Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </a>
+          <a href="#" target="_blank" aria-label="X">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+          </a>
+          <a href="#" target="_blank" aria-label="LinkedIn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20.447 20.452H16.89v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a1.98 1.98 0 01-1.977-1.978 1.979 1.979 0 113.956 0 1.98 1.98 0 01-1.979 1.978zm1.71 13.019H3.623V9h3.424v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+          <a href="#" target="_blank" aria-label="YouTube">
+            <svg width="16" height="12" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
