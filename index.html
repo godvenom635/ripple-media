@@ -1942,9 +1942,30 @@ const Smoke = (() => {
   const intro = document.getElementById('intro');
   const deepFounder = new URLSearchParams(location.search).get('w') === 'founder';
 
-  function introEligible(){
+  /* device gate — laptop/desktop with a real pointer only */
+  function deviceCanIntro(){
     if (!intro || RM || deepFounder) return false;
     return matchMedia('(min-width:1024px) and (hover:hover) and (pointer:fine)').matches;
+  }
+
+  /* frequency gate — after showing once, sit out the next 5 loads;
+     show again on the 6th load OR when they come back 3h+ later.
+     (localStorage so it survives closing the tab + tracks real time) */
+  const INTRO_EVERY_LOADS = 5;
+  const INTRO_COOLDOWN_MS  = 3 * 60 * 60 * 1000;   /* 3 hours */
+  function shouldShowIntro(){
+    let count = 0, last = 0;
+    try {
+      count = +localStorage.getItem('rip_intro_n')  || 0;
+      last  = +localStorage.getItem('rip_intro_ts') || 0;
+    } catch(e){}
+    const now = Date.now();
+    const show = !last || (now - last) >= INTRO_COOLDOWN_MS || count >= INTRO_EVERY_LOADS;
+    try {
+      if (show){ localStorage.setItem('rip_intro_ts', String(now)); localStorage.setItem('rip_intro_n', '0'); }
+      else     { localStorage.setItem('rip_intro_n', String(count + 1)); }
+    } catch(e){}
+    return show;
   }
 
   function dropIntro(){
@@ -1991,7 +2012,7 @@ const Smoke = (() => {
     dropIntro();
   } else {
     initWorld(worldD);
-    if (introEligible()) runIntro();
+    if (deviceCanIntro() && shouldShowIntro()) runIntro();
     else dropIntro();
   }
 })();
