@@ -649,6 +649,7 @@ body.brand.no-webgl::before{
 .flip-btn .dot{width:6px;height:6px;border-radius:50%;background:#fff;flex:none;animation:bpulse 2.8s ease infinite}
 .flip-btn .ar{transition:transform .35s ease}
 .flip-btn:hover .ar{transform:translateX(3px)}
+.flip-btn .txt-sm{display:none}   /* short label, shown only on mobile */
 .flip-eyebrow{
   cursor:pointer;display:inline-flex;align-items:center;gap:11px;
   font-family:var(--sans);font-size:13.5px;color:var(--white);
@@ -805,8 +806,18 @@ body.brand.no-webgl::before{
 }
 @media (max-width:640px){
   .deliver-grid,.t-grid,.res-grid{grid-template-columns:1fr}
-  .flip-btn{padding:9px 15px;font-size:13px}
+}
+/* Compact nav (phones + small tablets). Below 768 the full
+   "Founder-Led Personal Brand" label + Book a call won't fit beside the menu,
+   so show the short, still-obvious switch label, drop the redundant nav
+   Book a call (it's in the hero + every section) and tighten spacing. */
+@media (max-width:768px){
+  .nav-right{gap:12px}
+  .flip-btn{padding:9px 14px;font-size:13px}
   .flip-btn .txt-lg{display:none}
+  .flip-btn .txt-sm{display:inline}
+  .flip-btn .mkf{display:none}
+  nav .nav-right > .btn-sm{display:none}
 }
 
 /* ============================================================
@@ -924,6 +935,7 @@ body.preload .world .hero .rv{opacity:0!important;transform:translateY(28px)!imp
       <button class="flip-btn" data-go="b" aria-label="Switch to Founder-Led Personal Brand">
         <svg class="mkf" viewBox="0 0 256 256" aria-hidden="true"><use href="#pmark"/></svg>
         <span class="txt-lg">Founder-Led Personal Brand</span>
+        <span class="txt-sm">Personal Brand</span>
         <svg class="ar" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </button>
       <a href="https://calendly.com/ashishkumawat/30min" class="btn btn-sm">Book a call</a>
@@ -1259,6 +1271,7 @@ body.preload .world .hero .rv{opacity:0!important;transform:translateY(28px)!imp
         <button class="flip-btn" data-go="d" aria-label="Back to ripple Distribution">
           <svg class="ar" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="transform:rotate(180deg)"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           <span class="txt-lg">Distribution</span>
+          <span class="txt-sm">Distribution</span>
         </button>
         <a href="https://calendly.com/ashishkumawat/30min" class="btn btn-sm">Book a call</a>
       </div>
