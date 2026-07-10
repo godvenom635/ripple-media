@@ -229,10 +229,10 @@ h1 em,h2 em{
 }
 .card:hover .clip-thumb{filter:grayscale(0) contrast(1);transform:scale(1.045)}
 .clip-thumb::after{
-  content:"";position:absolute;inset:0;
+  content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
   background:linear-gradient(to top,rgba(0,0,0,.62),transparent 40%);
 }
-.clip-thumb iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:3}
+.clip-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;z-index:1;display:block;background:var(--panel)}
 .view-pill{
   position:absolute;left:14px;right:14px;bottom:14px;z-index:2;
   display:flex;align-items:center;justify-content:center;gap:9px;
@@ -247,7 +247,7 @@ h1 em,h2 em{
 .view-pill svg{transition:transform .35s ease}
 .card:hover .view-pill svg{transform:translate(2px,-2px)}
 .clip-meta{
-  position:absolute;top:14px;left:14px;z-index:2;
+  position:absolute;top:14px;left:14px;z-index:3;
   font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--white);
   background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.16);
   -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
@@ -970,10 +970,10 @@ body.preload .world .hero .rv{opacity:0!important;transform:translateY(28px)!imp
   <section class="results solid" id="results">
     <div class="wrap">
       <div class="grid">
-        <div class="card rv" data-yt="lu9z7c4Z7jk" data-href="https://youtube.com/shorts/lu9z7c4Z7jk">
-          <div class="clip-thumb" style="background-image:url('clips/yt-lu9z7c4Z7jk.jpg')">
-            <span class="clip-meta">YouTube · 7.9M views</span>
-            <span class="view-pill">View clip <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+        <div class="card rv">
+          <div class="clip-thumb" style="background-image:url('clips/clip-1.jpg')">
+            <video class="clip-vid" src="clips/clip-1.mp4" poster="clips/clip-1.jpg" muted loop playsinline preload="none" disablepictureinpicture oncontextmenu="return false" controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
+            <span class="clip-meta">YouTube · 8.5M views</span>
           </div>
         </div>
         <div class="card stat-tile rv d1">
@@ -981,10 +981,10 @@ body.preload .world .hero .rv{opacity:0!important;transform:translateY(28px)!imp
           <div class="lbl">Organic views generated</div>
           <div class="note">for clients, in the last 3 months</div>
         </div>
-        <div class="card rv d2" data-href="https://www.instagram.com/reel/DNfag4WO8mR/">
-          <div class="clip-thumb" style="background-image:url('clips/ig-DNfag4WO8mR.jpg')">
-            <span class="clip-meta">Instagram · 1.5M views</span>
-            <span class="view-pill">View clip <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+        <div class="card rv d2">
+          <div class="clip-thumb" style="background-image:url('clips/clip-2.jpg')">
+            <video class="clip-vid" src="clips/clip-2.mp4" poster="clips/clip-2.jpg" muted loop playsinline preload="none" disablepictureinpicture oncontextmenu="return false" controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
+            <span class="clip-meta">Instagram · 4.2M views</span>
           </div>
         </div>
         <div class="card stat-tile rv">
@@ -992,16 +992,16 @@ body.preload .world .hero .rv{opacity:0!important;transform:translateY(28px)!imp
           <div class="lbl">Videos per month</div>
           <div class="note">edited, formatted &amp; posted daily</div>
         </div>
-        <div class="card rv d1" data-yt="25tujvhFemQ" data-href="https://youtube.com/shorts/25tujvhFemQ">
-          <div class="clip-thumb" style="background-image:url('clips/yt-25tujvhFemQ.jpg')">
-            <span class="clip-meta">YouTube · 2.3M views</span>
-            <span class="view-pill">View clip <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
+        <div class="card rv d1">
+          <div class="clip-thumb" style="background-image:url('clips/clip-3.jpg')">
+            <video class="clip-vid" src="clips/clip-3.mp4" poster="clips/clip-3.jpg" muted loop playsinline preload="none" disablepictureinpicture oncontextmenu="return false" controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
+            <span class="clip-meta">YouTube · 9.6M views</span>
           </div>
         </div>
         <div class="card stat-tile rv d2">
           <div class="big" data-count="20" data-suffix="×">20×</div>
           <div class="lbl">Reach in 90 days</div>
-          <div class="note">guaranteed, or every penny back</div>
+          <div class="note">the target we build every system for</div>
         </div>
       </div>
       <div class="results-foot rv">
@@ -1031,7 +1031,7 @@ body.preload .world .hero .rv{opacity:0!important;transform:translateY(28px)!imp
         <div class="xp rv d3">
           <div class="xp-row"><b>600M+ views</b><span class="mid">Top Indian singers &amp; political campaigns</span><span class="end">3 months</span></div>
           <div class="xp-row"><b>6,000+ videos</b><span class="mid">Repurposed &amp; posted, per client</span><span class="end">Monthly</span></div>
-          <div class="xp-row"><b>20× reach</b><span class="mid">Or a full refund, no questions</span><span class="end">90 days</span></div>
+          <div class="xp-row"><b>20× reach</b><span class="mid">The benchmark for every client</span><span class="end">90 days</span></div>
         </div>
       </div>
       <div class="about-visual rv d1">
@@ -1159,9 +1159,9 @@ body.preload .world .hero .rv{opacity:0!important;transform:translateY(28px)!imp
   <section class="guarantee solid">
     <div class="wrap">
       <div class="g-card rv">
-        <span class="badge">The guarantee</span>
-        <h2><em>20×</em> your reach in 90 days.<br>Or every penny back.</h2>
-        <p>If we don't at least 20× the reach you're getting today within 90 days, you get a full refund. Worst case, you build your entire distribution for free.</p>
+        <span class="badge">The target</span>
+        <h2><em>20×</em> your reach in 90 days.<br>That's what we build for.</h2>
+        <p>Every system we set up is engineered toward one number: at least 20× the reach you're getting today, inside your first 90 days. One machine, one outcome.</p>
       </div>
     </div>
   </section>
@@ -1191,8 +1191,8 @@ body.preload .world .hero .rv{opacity:0!important;transform:translateY(28px)!imp
             <div class="faq-body">Up to 6,000+ pieces of short-form content a month, depending on your source material and plan. Posted daily across every platform.</div>
           </details>
           <details class="faq" name="faq">
-            <summary>How does the 20× guarantee work? <span class="ic"></span></summary>
-            <div class="faq-body">If you don't get at least 20× the reach you're getting today within 90 days, we refund you in full. Worst case, you've built your distribution for free.</div>
+            <summary>Is 20× reach realistic? <span class="ic"></span></summary>
+            <div class="faq-body">Yes. When you go from a few posts a week to hundreds of clips a month across every platform, reach multiplies fast. 20× within 90 days is the benchmark we build every client's system toward.</div>
           </details>
           <details class="faq" name="faq">
             <summary>How fast do we start? <span class="ic"></span></summary>
@@ -1371,48 +1371,36 @@ body.preload .world .hero .rv{opacity:0!important;transform:translateY(28px)!imp
         <div class="head rv">
           <span class="badge">Proof</span>
           <h2 style="margin-top:22px">Founders we've <em>grown</em>.</h2>
-          <p class="sub">Real people, real numbers. Testimonials and results drop in right here.</p>
+          <p class="sub">Real people. Real numbers.</p>
         </div>
 
-        <!-- ============================================================
-             TESTIMONIALS — replace each card below with a real client.
-             Swap .t-quote text, .t-name, .t-role and the avatar image.
-             (Remove class "ph" once real content is in.)
-             ============================================================ -->
         <div class="t-grid rv d1">
-          <div class="tcard ph">
-            <p class="t-quote">“Client testimonial goes here. The transformation in their words, kept to 2 or 3 punchy sentences.”</p>
+          <div class="tcard">
+            <p class="t-quote">“We went from 28 followers to 21,000 in 21 days. They promised us 10k. They did double that. Still a bit shocked honestly.”</p>
             <div class="t-person">
-              <span class="t-avatar">PHOTO</span>
-              <span><span class="t-name">Client Name</span><br><span class="t-role">Founder, Company</span></span>
+              <span><span class="t-name">Alex</span><br><span class="t-role">Founder, Media Removal</span></span>
             </div>
           </div>
-          <div class="tcard ph">
-            <p class="t-quote">“Client testimonial goes here. What changed for their brand and their business after 90 days.”</p>
+          <div class="tcard">
+            <p class="t-quote">“Got 5 high quality leads for my brand already. Real ones, not random DMs.”</p>
             <div class="t-person">
-              <span class="t-avatar">PHOTO</span>
-              <span><span class="t-name">Client Name</span><br><span class="t-role">Founder, Company</span></span>
+              <span><span class="t-name">PAU</span><br><span class="t-role">Founder</span></span>
             </div>
           </div>
-          <div class="tcard ph">
-            <p class="t-quote">“Client testimonial goes here. The moment they realised it was actually working.”</p>
+          <div class="tcard">
+            <p class="t-quote">“5,000 followers in just 3 days. I keep checking to make sure it's real.”</p>
             <div class="t-person">
-              <span class="t-avatar">PHOTO</span>
-              <span><span class="t-name">Client Name</span><br><span class="t-role">Founder, Company</span></span>
+              <span><span class="t-name">Michelle</span><br><span class="t-role">Founder</span></span>
             </div>
           </div>
         </div>
 
-        <!-- ============================================================
-             RESULTS — replace the numbers + labels with real client stats.
-             ============================================================ -->
         <div class="res-grid rv d2">
-          <div class="rescard ph"><div class="big">0 → 10k</div><div class="lbl">Followers in 90 days</div></div>
-          <div class="rescard ph"><div class="big">···</div><div class="lbl">Avg. views per post</div></div>
-          <div class="rescard ph"><div class="big">···</div><div class="lbl">Inbound leads / month</div></div>
+          <div class="rescard"><div class="big">28 → 21k</div><div class="lbl">Followers in 21 days</div></div>
+          <div class="rescard"><div class="big">800K</div><div class="lbl">Avg. views per post</div></div>
+          <div class="rescard"><div class="big">5+</div><div class="lbl">Qualified leads / mo</div></div>
           <div class="rescard"><div class="big">100%</div><div class="lbl">Money-back guarantee</div></div>
         </div>
-        <p class="ph-note">↑ Placeholders. Send me the testimonials, screenshots and numbers and I'll drop them straight in.</p>
       </div>
     </section>
 
@@ -1824,21 +1812,22 @@ const Smoke = (() => {
       rvs.forEach(el => el.classList.add('in'));
     }
 
-    /* clips — inline YT embed / IG link-out */
-    root.querySelectorAll('.card[data-href]').forEach(card => {
-      card.style.cursor = 'pointer';
-      card.addEventListener('click', () => {
-        const yt = card.dataset.yt;
-        if (yt){
-          const thumb = card.querySelector('.clip-thumb');
-          if (thumb.querySelector('iframe')) return;
-          thumb.style.filter = 'none';
-          thumb.innerHTML = `<iframe src="https://www.youtube.com/embed/${yt}?autoplay=1&playsinline=1&rel=0" title="clip" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
-        } else {
-          window.open(card.dataset.href, '_blank', 'noopener');
-        }
-      });
-    });
+    /* clips — muted inline loops, no click-out (visitors stay on-site, can't reach the source) */
+    const clipVids = root.querySelectorAll('.clip-vid');
+    if (clipVids.length){
+      if ('IntersectionObserver' in window && !RM){
+        const vio = new IntersectionObserver(es => {
+          es.forEach(e => {
+            const v = e.target;
+            if (e.isIntersecting){ v.preload = 'auto'; v.play().catch(() => {}); }
+            else { v.pause(); }
+          });
+        }, {threshold: .25});
+        clipVids.forEach(v => vio.observe(v));
+      } else {
+        clipVids.forEach(v => { v.preload = 'auto'; v.play().catch(() => {}); });
+      }
+    }
 
     /* hero parallax — content drifts up + fades as you scroll away */
     const heroWrap = root.querySelector('.hero .wrap');
