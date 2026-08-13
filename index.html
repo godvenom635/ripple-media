@@ -268,6 +268,165 @@ h1 em,h2 em{
 .stat-tile .note{color:var(--faint);font-size:13px}
 .results-foot{display:flex;justify-content:center;gap:14px;margin-top:46px}
 
+/* ============================================================
+   VIDEO TESTIMONIALS — "stories" wall + fullscreen lightbox
+   Built on tokens so it inverts cleanly in the brand world.
+   The card interior always stays dark-on-video (white caption
+   over a scrim), which reads correctly on black AND on white.
+   ============================================================ */
+.stories{padding:120px 0 130px}
+.stories .head{text-align:center;max-width:860px;margin:0 auto 70px}
+.stories .head h2{margin-top:24px;font-size:clamp(38px,5.2vw,74px)}
+.stories .head .sub{margin-top:26px;color:var(--muted);font-size:17px;line-height:1.72}
+
+.vt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;max-width:1060px;margin:0 auto;align-items:start}
+/* editorial stagger — outer cards hang lower than the centre one */
+.vt-grid > :nth-child(1){margin-top:36px}
+.vt-grid > :nth-child(3){margin-top:70px}
+
+.vt-card{position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent;outline:none}
+.vt-frame{
+  position:relative;aspect-ratio:9/16;border-radius:22px;overflow:hidden;
+  border:1px solid var(--line);background:var(--panel);
+  transition:transform .55s cubic-bezier(.2,.8,.3,1),border-color .45s ease,box-shadow .55s ease;
+}
+.vt-card:hover .vt-frame,.vt-card:focus-visible .vt-frame{
+  transform:translateY(-9px);border-color:rgba(255,255,255,.32);
+  box-shadow:0 28px 76px rgba(0,0,0,.6), 0 0 62px rgba(255,255,255,.07);
+}
+/* ambient halo behind the hovered card */
+.vt-card::before{
+  content:"";position:absolute;left:50%;top:50%;width:118%;height:112%;
+  transform:translate(-50%,-50%);border-radius:50%;z-index:-1;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(255,255,255,.13),transparent 72%);
+  opacity:0;transition:opacity .6s ease;
+}
+.vt-card:hover::before,.vt-card:focus-visible::before{opacity:1}
+
+.vt-vid{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 24%;
+  z-index:1;display:block;background:var(--panel);
+  filter:grayscale(1) contrast(1.06);
+  transition:filter .6s ease,transform .9s cubic-bezier(.2,.7,.2,1);
+}
+.vt-card:hover .vt-vid,.vt-card:focus-visible .vt-vid{filter:grayscale(0) contrast(1);transform:scale(1.045)}
+.vt-frame::after{
+  content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(to top,rgba(0,0,0,.88),rgba(0,0,0,.34) 30%,transparent 60%);
+}
+
+.vt-chip{
+  position:absolute;top:14px;left:14px;z-index:4;
+  font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:#fff;
+  background:rgba(0,0,0,.52);border:1px solid rgba(255,255,255,.2);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  padding:7px 13px;border-radius:100px;
+}
+
+.vt-play{
+  position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);z-index:4;
+  width:66px;height:66px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid rgba(255,255,255,.92);
+  background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,.04) 60%);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  box-shadow:0 0 12px rgba(255,255,255,.3),0 0 46px rgba(255,255,255,.2),inset 0 1px 0 rgba(255,255,255,.5);
+  transition:transform .45s cubic-bezier(.2,.8,.3,1),box-shadow .45s ease,background .45s ease;
+}
+.vt-play svg{margin-left:3px;position:relative;z-index:1}
+.vt-play::before{
+  content:"";position:absolute;inset:-1px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.5);animation:vtpulse 3.6s ease-out infinite;
+}
+@keyframes vtpulse{0%{transform:scale(1);opacity:.5}70%{transform:scale(1.7);opacity:0}100%{opacity:0}}
+.vt-card:hover .vt-play,.vt-card:focus-visible .vt-play{
+  transform:translate(-50%,-50%) scale(1.1);
+  background:linear-gradient(180deg,rgba(255,255,255,.34),rgba(255,255,255,.08) 60%);
+  box-shadow:0 0 18px rgba(255,255,255,.46),0 0 72px rgba(255,255,255,.3),inset 0 1px 0 rgba(255,255,255,.6);
+}
+
+.vt-cap{position:absolute;left:20px;right:20px;bottom:19px;z-index:4}
+.vt-name{display:block;font-size:16.5px;font-weight:500;color:#fff;letter-spacing:-.01em}
+.vt-role{display:block;font-size:12.5px;color:rgba(255,255,255,.6);margin-top:3px}
+.vt-line{display:block;height:1.5px;background:rgba(255,255,255,.18);margin-top:14px;border-radius:2px;overflow:hidden}
+.vt-line i{display:block;height:100%;width:0;background:rgba(255,255,255,.85)}
+
+.vt-quote{
+  display:block;margin-top:24px;padding-left:17px;
+  border-left:1px solid var(--line);
+  font-size:15px;line-height:1.72;color:var(--muted);
+}
+.vt-quote em{font-family:var(--serif);font-style:italic;font-size:1.14em;color:var(--white)}
+
+.vt-foot{display:flex;flex-direction:column;align-items:center;gap:24px;margin-top:86px}
+.vt-hint{display:inline-flex;align-items:center;gap:9px;font-size:13px;color:var(--faint);letter-spacing:.02em}
+.vt-btns{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+
+/* ---- awaiting-file state (video missing or failed to load) ---- */
+.vt-card.no-src{cursor:default}
+.vt-card.no-src::before{display:none}
+.vt-card.no-src .vt-vid,.vt-card.no-src .vt-play,.vt-card.no-src .vt-frame::after{display:none}
+.vt-card.no-src .vt-frame{
+  border-style:dashed;
+  background:
+    repeating-linear-gradient(135deg,transparent,transparent 13px,rgba(128,128,128,.06) 13px,rgba(128,128,128,.06) 26px),
+    var(--panel);
+}
+.vt-card.no-src:hover .vt-frame{transform:none;box-shadow:none;border-color:var(--line)}
+.vt-ph{
+  display:none;position:absolute;inset:0;z-index:3;
+  flex-direction:column;align-items:center;justify-content:center;gap:9px;
+  text-align:center;padding:0 22px;
+  font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);
+}
+.vt-ph b{font-weight:500;letter-spacing:.02em;text-transform:none;font-size:13.5px;color:var(--muted)}
+.vt-card.no-src .vt-ph{display:flex}
+.vt-card.no-src .vt-name{color:var(--white)}
+.vt-card.no-src .vt-role{color:var(--faint)}
+.vt-card.no-src .vt-line{background:var(--line)}
+
+/* ---- lightbox (always dark, shared by both worlds) ---- */
+body.vt-lock{overflow:hidden}
+#vt-lb{
+  position:fixed;inset:0;z-index:400;display:none;
+  align-items:center;justify-content:center;padding:34px 24px;
+  background:rgba(0,0,0,.86);
+  -webkit-backdrop-filter:blur(24px) saturate(.75);backdrop-filter:blur(24px) saturate(.75);
+  opacity:0;transition:opacity .4s ease;
+}
+#vt-lb.open{display:flex}
+#vt-lb.show{opacity:1}
+.vt-stage{
+  position:relative;display:flex;flex-direction:column;align-items:center;gap:22px;
+  opacity:0;transform:translateY(20px) scale(.97);
+  transition:opacity .45s ease,transform .55s cubic-bezier(.2,.8,.3,1);
+}
+#vt-lb.show .vt-stage{opacity:1;transform:none}
+.vt-stage video{
+  max-height:74vh;max-width:min(90vw,860px);width:auto;height:auto;
+  border-radius:20px;border:1px solid rgba(255,255,255,.16);background:#000;display:block;
+  box-shadow:0 44px 130px rgba(0,0,0,.75), 0 0 90px rgba(255,255,255,.06);
+}
+.vt-lb-cap{text-align:center;color:#fff}
+.vt-lb-cap .n{font-size:18px;font-weight:500;letter-spacing:-.01em}
+.vt-lb-cap .r{font-size:13px;color:rgba(255,255,255,.55);margin-top:4px}
+.vt-count{
+  position:absolute;top:-34px;left:50%;transform:translateX(-50%);
+  font-size:11.5px;letter-spacing:.2em;color:rgba(255,255,255,.42);font-variant-numeric:tabular-nums;
+}
+.vt-ctl{
+  position:fixed;z-index:2;display:flex;align-items:center;justify-content:center;
+  width:46px;height:46px;border-radius:50%;cursor:pointer;
+  border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.06);color:#fff;
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  transition:background .3s ease,border-color .3s ease,transform .3s ease;
+}
+.vt-ctl:hover{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.5);transform:scale(1.06)}
+.vt-ctl:focus-visible{border-color:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.2)}
+.vt-x{top:26px;right:28px}
+.vt-prev{left:28px;top:50%;margin-top:-23px}
+.vt-next{right:28px;top:50%;margin-top:-23px}
+
 /* ---------- about ---------- */
 .about{padding:140px 0}
 .about-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:70px;align-items:start}
@@ -572,6 +731,29 @@ footer{
   .about,.process{padding:110px 0}
   .compare{padding:40px 0 110px}
   .guarantee,.faq-sec{padding:0 0 110px}
+  .stories{padding:100px 0 110px}
+  .vt-grid{gap:16px}
+  .vt-grid > :nth-child(1){margin-top:22px}
+  .vt-grid > :nth-child(3){margin-top:44px}
+  .vt-quote{font-size:14px;margin-top:18px}
+  .vt-play{width:54px;height:54px}
+  .vt-prev,.vt-next{top:auto;bottom:26px;margin-top:0}
+}
+/* mobile: the wall becomes a snap-scrolling reel of stories */
+@media (max-width:700px){
+  .stories .head{margin-bottom:44px}
+  .vt-grid{
+    display:flex;gap:14px;max-width:none;margin:0 -20px;padding:6px 20px 20px;
+    overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .vt-grid::-webkit-scrollbar{display:none}
+  .vt-card{flex:0 0 80%;scroll-snap-align:center}
+  .vt-grid > :nth-child(1),.vt-grid > :nth-child(3){margin-top:0}
+  .vt-foot{margin-top:52px}
+  .vt-foot .btn{width:100%;justify-content:center}
+  .vt-btns{width:100%}
+  .vt-x{top:18px;right:18px}
 }
 @media (max-width:640px){
   .hide-sm{display:none}
@@ -605,8 +787,10 @@ footer{
 @media (prefers-reduced-motion:reduce){
   .rv{opacity:1;transform:none;transition:none;filter:none}
   .mq-track,.mq-track.rev,.mouse::after,.about-visual .rings i,
-  .badge::before,.floater,.mk-laptop,.laptop-screen::before,
+  .badge::before,.floater,.mk-laptop,.laptop-screen::before,.vt-play::before,
   .mk-about,#pmark .r1,#pmark .r2,#pmark .r3,#pmark .core{animation:none!important}
+  .vt-frame,.vt-vid,.vt-card::before,.vt-stage{transition:none}
+  .vt-vid{filter:grayscale(0)}
   #dust{display:none}
   .floater{opacity:0}
 }
@@ -781,6 +965,14 @@ body.brand.no-webgl::before{
 .rescard .lbl{color:var(--muted);font-size:13.5px;margin-top:10px}
 .ph-note{text-align:center;color:var(--faint);font-size:13px;letter-spacing:.02em;margin-top:26px}
 
+/* ---- video testimonials on the light world: soften the glow to a real shadow ---- */
+#world-brand .vt-card:hover .vt-frame,#world-brand .vt-card:focus-visible .vt-frame{
+  border-color:rgba(0,0,0,.24);
+  box-shadow:0 26px 60px rgba(0,0,0,.18), 0 4px 12px rgba(0,0,0,.08);
+}
+#world-brand .vt-card::before{background:radial-gradient(closest-side,rgba(0,0,0,.10),transparent 72%)}
+#world-brand .vt-card.no-src:hover .vt-frame{box-shadow:none;border-color:var(--line)}
+
 /* hovers that must stay dark on the light world (were going white → invisible) */
 #world-brand .faq summary:hover{color:#0b0b0b}
 #world-brand .foot-col a:hover{color:#0b0b0b}
@@ -910,6 +1102,21 @@ body.preload .world .hero .rv{opacity:0!important;transform:translateY(28px)!imp
 </svg>
 
 <!-- ============ INTRO PORTAL (laptop / desktop only) ============ -->
+<!-- ============ VIDEO TESTIMONIALS LIGHTBOX ============ -->
+<div id="vt-lb">
+  <button class="vt-ctl vt-x" type="button" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6l-12 12M6 6l12 12"/></svg></button>
+  <button class="vt-ctl vt-prev" type="button" aria-label="Previous story"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 19l-7-7 7-7"/></svg></button>
+  <button class="vt-ctl vt-next" type="button" aria-label="Next story"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 19l7-7-7-7"/></svg></button>
+  <div class="vt-stage">
+    <video src="" controls playsinline crossorigin="anonymous"></video>
+    <div class="vt-lb-cap">
+      <div class="n"></div>
+      <div class="r"></div>
+    </div>
+    <div class="vt-count"><span class="cur">1</span> / <span class="tot">3</span></div>
+  </div>
+</div>
+
 <div id="intro" role="button" tabindex="0" aria-label="Enter the ripple site">
   <button class="intro-skip" type="button" aria-label="Skip intro">Skip</button>
   <div class="intro-stage">
@@ -1007,6 +1214,84 @@ body.preload .world .hero .rv{opacity:0!important;transform:translateY(28px)!imp
       <div class="results-foot rv">
         <a href="https://calendly.com/ashishkumawat/30min" class="btn">Book a call</a>
         <a href="#process" class="btn btn-dim">How it works</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLIENT STORIES · VIDEO TESTIMONIALS -->
+  <section class="stories solid" id="stories">
+    <div class="wrap">
+      <div class="head rv">
+        <span class="badge">Client stories</span>
+        <h2>Don't take our word.<br><em>Take theirs.</em></h2>
+        <p class="sub">The founders we run distribution for, on camera, saying what actually changed. Unscripted, uncut, nothing we wrote for them.</p>
+      </div>
+
+      <div class="vt-grid">
+        <div class="vt-card rv" role="button" tabindex="0"
+             data-src="testimonials/story-1.mp4"
+             data-poster="testimonials/story-1.jpg"
+             data-name="Alex" data-role="Founder, Media Removal">
+          <div class="vt-frame">
+            <video class="vt-vid" src="testimonials/story-1.mp4" poster="testimonials/story-1.jpg" muted loop playsinline preload="none" disablepictureinpicture oncontextmenu="return false" controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
+            <span class="vt-ph">Story 01<b>drop story-1.mp4</b></span>
+            <span class="vt-chip">28 → 21K in 21 days</span>
+            <span class="vt-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vt-cap">
+              <span class="vt-name">Alex</span>
+              <span class="vt-role">Founder, Media Removal</span>
+              <span class="vt-line"><i></i></span>
+            </span>
+          </div>
+          <span class="vt-quote">“They promised us 10k. They did <em>double that.</em> Still a bit shocked honestly.”</span>
+        </div>
+
+        <div class="vt-card rv d1" role="button" tabindex="0"
+             data-src="testimonials/story-2.mp4"
+             data-poster="testimonials/story-2.jpg"
+             data-name="PAU" data-role="Founder">
+          <div class="vt-frame">
+            <video class="vt-vid" src="testimonials/story-2.mp4" poster="testimonials/story-2.jpg" muted loop playsinline preload="none" disablepictureinpicture oncontextmenu="return false" controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
+            <span class="vt-ph">Story 02<b>drop story-2.mp4</b></span>
+            <span class="vt-chip">5 qualified leads</span>
+            <span class="vt-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vt-cap">
+              <span class="vt-name">PAU</span>
+              <span class="vt-role">Founder</span>
+              <span class="vt-line"><i></i></span>
+            </span>
+          </div>
+          <span class="vt-quote">“Got 5 high quality leads for my brand already. <em>Real ones,</em> not random DMs.”</span>
+        </div>
+
+        <div class="vt-card rv d2" role="button" tabindex="0"
+             data-src="testimonials/story-3.mp4"
+             data-poster="testimonials/story-3.jpg"
+             data-name="Michelle" data-role="Founder">
+          <div class="vt-frame">
+            <video class="vt-vid" src="testimonials/story-3.mp4" poster="testimonials/story-3.jpg" muted loop playsinline preload="none" disablepictureinpicture oncontextmenu="return false" controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
+            <span class="vt-ph">Story 03<b>drop story-3.mp4</b></span>
+            <span class="vt-chip">5,000 in 3 days</span>
+            <span class="vt-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="vt-cap">
+              <span class="vt-name">Michelle</span>
+              <span class="vt-role">Founder</span>
+              <span class="vt-line"><i></i></span>
+            </span>
+          </div>
+          <span class="vt-quote">“5,000 followers in just 3 days. I keep checking to make sure it's <em>real.</em>”</span>
+        </div>
+      </div>
+
+      <div class="vt-foot rv d2">
+        <span class="vt-hint">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>
+          Tap any story to play it with sound
+        </span>
+        <div class="vt-btns">
+          <a href="https://calendly.com/ashishkumawat/30min" class="btn">Book a call</a>
+          <a href="#process" class="btn btn-dim">How it works</a>
+        </div>
       </div>
     </div>
   </section>
@@ -1361,6 +1646,84 @@ body.preload .world .hero .rv{opacity:0!important;transform:translateY(28px)!imp
         <div class="about-visual rv d1">
           <div class="rings" aria-hidden="true"><i></i><i></i><i></i></div>
           <svg class="mk mk-about" viewBox="0 0 256 256" aria-hidden="true"><use href="#pmark"/></svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- CLIENT STORIES · VIDEO TESTIMONIALS -->
+    <section class="stories solid" id="b-stories">
+      <div class="wrap">
+        <div class="head rv">
+          <span class="badge">In their words</span>
+          <h2>The founders,<br><em>unfiltered.</em></h2>
+          <p class="sub">Not a case-study PDF. The actual people we built brands for, on camera, telling you what 90 days did.</p>
+        </div>
+
+        <div class="vt-grid">
+          <div class="vt-card rv" role="button" tabindex="0"
+               data-src="testimonials/story-1.mp4"
+               data-poster="testimonials/story-1.jpg"
+               data-name="Alex" data-role="Founder, Media Removal">
+            <div class="vt-frame">
+              <video class="vt-vid" src="testimonials/story-1.mp4" poster="testimonials/story-1.jpg" muted loop playsinline preload="none" disablepictureinpicture oncontextmenu="return false" controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
+              <span class="vt-ph">Story 01<b>drop story-1.mp4</b></span>
+              <span class="vt-chip">28 → 21K in 21 days</span>
+              <span class="vt-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
+              <span class="vt-cap">
+                <span class="vt-name">Alex</span>
+                <span class="vt-role">Founder, Media Removal</span>
+                <span class="vt-line"><i></i></span>
+              </span>
+            </div>
+            <span class="vt-quote">“We started at 28 followers. <em>Twenty-one thousand</em> three weeks later.”</span>
+          </div>
+
+          <div class="vt-card rv d1" role="button" tabindex="0"
+               data-src="testimonials/story-2.mp4"
+               data-poster="testimonials/story-2.jpg"
+               data-name="PAU" data-role="Founder">
+            <div class="vt-frame">
+              <video class="vt-vid" src="testimonials/story-2.mp4" poster="testimonials/story-2.jpg" muted loop playsinline preload="none" disablepictureinpicture oncontextmenu="return false" controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
+              <span class="vt-ph">Story 02<b>drop story-2.mp4</b></span>
+              <span class="vt-chip">5 qualified leads</span>
+              <span class="vt-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
+              <span class="vt-cap">
+                <span class="vt-name">PAU</span>
+                <span class="vt-role">Founder</span>
+                <span class="vt-line"><i></i></span>
+              </span>
+            </div>
+            <span class="vt-quote">“The leads started coming in before I'd even <em>finished onboarding.</em>”</span>
+          </div>
+
+          <div class="vt-card rv d2" role="button" tabindex="0"
+               data-src="testimonials/story-3.mp4"
+               data-poster="testimonials/story-3.jpg"
+               data-name="Michelle" data-role="Founder">
+            <div class="vt-frame">
+              <video class="vt-vid" src="testimonials/story-3.mp4" poster="testimonials/story-3.jpg" muted loop playsinline preload="none" disablepictureinpicture oncontextmenu="return false" controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
+              <span class="vt-ph">Story 03<b>drop story-3.mp4</b></span>
+              <span class="vt-chip">5,000 in 3 days</span>
+              <span class="vt-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
+              <span class="vt-cap">
+                <span class="vt-name">Michelle</span>
+                <span class="vt-role">Founder</span>
+                <span class="vt-line"><i></i></span>
+              </span>
+            </div>
+            <span class="vt-quote">“I showed up for one recording day. <em>They ran everything else.</em>”</span>
+          </div>
+        </div>
+
+        <div class="vt-foot rv d2">
+          <span class="vt-hint">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>
+            Tap any story to play it with sound
+          </span>
+          <div class="vt-btns">
+            <a href="https://calendly.com/ashishkumawat/30min" class="btn">Book a call</a>
+            <a href="#b-offer" class="btn btn-dim">See what's included</a>
+          </div>
         </div>
       </div>
     </section>
@@ -1936,6 +2299,136 @@ const Smoke = (() => {
     e.preventDefault();
     lenis ? lenis.scrollTo(el, {offset: -70}) : el.scrollIntoView({behavior:'smooth'});
   });
+
+  /* ============================================================
+     VIDEO TESTIMONIALS — lightbox + frame navigation
+     ============================================================ */
+  (function(){
+    const lb = document.getElementById('vt-lb');
+    const stage = lb.querySelector('.vt-stage');
+    const vid = stage.querySelector('video');
+    const nameEl = stage.querySelector('.n');
+    const roleEl = stage.querySelector('.r');
+    const curEl = lb.querySelector('.cur');
+    const totEl = lb.querySelector('.tot');
+    const btnX = lb.querySelector('.vt-x');
+    const btnPrev = lb.querySelector('.vt-prev');
+    const btnNext = lb.querySelector('.vt-next');
+
+    let stories = [];
+    let current = -1;
+
+    function openLb(idx){
+      if (idx < 0 || idx >= stories.length) return;
+      current = idx;
+      const s = stories[idx];
+      vid.src = s.src;
+      vid.poster = s.poster;
+      nameEl.textContent = s.name;
+      roleEl.textContent = s.role;
+      curEl.textContent = idx + 1;
+      document.body.classList.add('vt-lock');
+      lb.classList.add('open');
+      setTimeout(() => { lb.classList.add('show'); }, 24);
+      vid.play().catch(() => {});
+    }
+
+    function closeLb(){
+      lb.classList.remove('show');
+      setTimeout(() => {
+        lb.classList.remove('open');
+        document.body.classList.remove('vt-lock');
+        vid.pause();
+        vid.src = '';
+        current = -1;
+      }, 420);
+    }
+
+    function loadStories(world){
+      const host = world === 'b' ? worldB : worldD;
+      const cards = host.querySelectorAll('.vt-card');
+      stories = [];
+      cards.forEach(c => {
+        stories.push({
+          src: c.dataset.src,
+          poster: c.dataset.poster,
+          name: c.dataset.name,
+          role: c.dataset.role,
+          el: c
+        });
+      });
+      totEl.textContent = stories.length;
+      if (stories.length > 0){
+        stories.forEach((s, i) => {
+          s.el.addEventListener('click', () => openLb(i));
+          s.el.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              openLb(i);
+            }
+          });
+        });
+      }
+    }
+
+    btnX.addEventListener('click', closeLb);
+    btnPrev.addEventListener('click', () => {
+      if (current > 0) openLb(current - 1);
+      else if (current === 0) openLb(stories.length - 1);
+    });
+    btnNext.addEventListener('click', () => {
+      if (current < stories.length - 1) openLb(current + 1);
+      else if (current === stories.length - 1) openLb(0);
+    });
+    lb.addEventListener('click', e => {
+      if (e.target === lb) closeLb();
+    });
+    document.addEventListener('keydown', e => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLb();
+      if (e.key === 'ArrowLeft') btnPrev.click();
+      if (e.key === 'ArrowRight') btnNext.click();
+    });
+
+    /* init stories in the live world + re-init when world switches */
+    function initStories(){
+      const live = current === 'd' ? worldD : worldB;
+      loadStories(current);
+    }
+
+    initStories();
+    const origFlip = window.flip || (() => {});
+    window.flip = function(target){
+      if (target === current) return;
+      current = target;
+      const from = current === 'd' ? worldD : worldB;
+      const to = target === 'd' ? worldD : worldB;
+      initWorld(to);
+      if (RM){
+        from.style.display = 'none';
+        to.style.display = 'block';
+        window.scrollTo(0, 0);
+        apply(target);
+        initStories();
+        return;
+      }
+      from.classList.add('leaving');
+      setTimeout(() => {
+        from.style.display = 'none';
+        from.classList.remove('leaving');
+        window.scrollTo(0, 0);
+        apply(target);
+        to.style.display = 'block';
+        to.classList.add('entering');
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          to.classList.add('enter-anim');
+          to.classList.remove('entering');
+        }));
+        setTimeout(() => to.classList.remove('enter-anim'), 1000);
+        initStories();
+      }, 520);
+    };
+  })();
 
   /* ============================================================
      INTRO PORTAL — a single drop that bursts into the mark, then
