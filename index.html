@@ -316,11 +316,7 @@ h1 em,h2 em{
 }
 
 .vt-chip{
-  position:absolute;top:14px;left:14px;z-index:4;
-  font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:#fff;
-  background:rgba(0,0,0,.52);border:1px solid rgba(255,255,255,.2);
-  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
-  padding:7px 13px;border-radius:100px;
+  display:none;
 }
 
 .vt-play{
@@ -345,18 +341,9 @@ h1 em,h2 em{
   box-shadow:0 0 18px rgba(255,255,255,.46),0 0 72px rgba(255,255,255,.3),inset 0 1px 0 rgba(255,255,255,.6);
 }
 
-.vt-cap{position:absolute;left:20px;right:20px;bottom:19px;z-index:4}
-.vt-name{display:block;font-size:16.5px;font-weight:500;color:#fff;letter-spacing:-.01em}
-.vt-role{display:block;font-size:12.5px;color:rgba(255,255,255,.6);margin-top:3px}
-.vt-line{display:block;height:1.5px;background:rgba(255,255,255,.18);margin-top:14px;border-radius:2px;overflow:hidden}
-.vt-line i{display:block;height:100%;width:0;background:rgba(255,255,255,.85)}
-
-.vt-quote{
-  display:block;margin-top:24px;padding-left:17px;
-  border-left:1px solid var(--line);
-  font-size:15px;line-height:1.72;color:var(--muted);
+.vt-cap,.vt-name,.vt-role,.vt-line,.vt-line i,.vt-quote{
+  display:none;
 }
-.vt-quote em{font-family:var(--serif);font-style:italic;font-size:1.14em;color:var(--white)}
 
 .vt-foot{display:flex;flex-direction:column;align-items:center;gap:24px;margin-top:86px}
 .vt-hint{display:inline-flex;align-items:center;gap:9px;font-size:13px;color:var(--faint);letter-spacing:.02em}
@@ -374,13 +361,8 @@ h1 em,h2 em{
 }
 .vt-card.no-src:hover .vt-frame{transform:none;box-shadow:none;border-color:var(--line)}
 .vt-ph{
-  display:none;position:absolute;inset:0;z-index:3;
-  flex-direction:column;align-items:center;justify-content:center;gap:9px;
-  text-align:center;padding:0 22px;
-  font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);
+  display:none;
 }
-.vt-ph b{font-weight:500;letter-spacing:.02em;text-transform:none;font-size:13.5px;color:var(--muted)}
-.vt-card.no-src .vt-ph{display:flex}
 .vt-card.no-src .vt-name{color:var(--white)}
 .vt-card.no-src .vt-role{color:var(--faint)}
 .vt-card.no-src .vt-line{background:var(--line)}
@@ -407,9 +389,9 @@ body.vt-lock{overflow:hidden}
   border-radius:20px;border:1px solid rgba(255,255,255,.16);background:#000;display:block;
   box-shadow:0 44px 130px rgba(0,0,0,.75), 0 0 90px rgba(255,255,255,.06);
 }
-.vt-lb-cap{text-align:center;color:#fff}
-.vt-lb-cap .n{font-size:18px;font-weight:500;letter-spacing:-.01em}
-.vt-lb-cap .r{font-size:13px;color:rgba(255,255,255,.55);margin-top:4px}
+.vt-lb-cap{
+  display:none;
+}
 .vt-count{
   position:absolute;top:-34px;left:50%;transform:translateX(-50%);
   font-size:11.5px;letter-spacing:.2em;color:rgba(255,255,255,.42);font-variant-numeric:tabular-nums;
@@ -1109,10 +1091,6 @@ body.preload .world .hero .rv{opacity:0!important;transform:translateY(28px)!imp
   <button class="vt-ctl vt-next" type="button" aria-label="Next story"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 19l7-7-7-7"/></svg></button>
   <div class="vt-stage">
     <video src="" controls playsinline crossorigin="anonymous"></video>
-    <div class="vt-lb-cap">
-      <div class="n"></div>
-      <div class="r"></div>
-    </div>
     <div class="vt-count"><span class="cur">1</span> / <span class="tot">3</span></div>
   </div>
 </div>
@@ -1222,64 +1200,37 @@ body.preload .world .hero .rv{opacity:0!important;transform:translateY(28px)!imp
   <section class="stories solid" id="stories">
     <div class="wrap">
       <div class="head rv">
-        <span class="badge">Client stories</span>
-        <h2>Don't take our word.<br><em>Take theirs.</em></h2>
-        <p class="sub">The founders we run distribution for, on camera, saying what actually changed. Unscripted, uncut, nothing we wrote for them.</p>
+        <span class="badge">Testimonials</span>
+        <h2>What clients<br><em>need to say.</em></h2>
+        <p class="sub">Real founders, real results. No scripts, no edits, just their story.</p>
       </div>
 
       <div class="vt-grid">
-        <div class="vt-card rv" role="button" tabindex="0"
-             data-src="testimonials/story-1.mp4"
-             data-poster="testimonials/story-1.jpg"
-             data-name="Alex" data-role="Founder, Media Removal">
-          <div class="vt-frame">
-            <video class="vt-vid" src="testimonials/story-1.mp4" poster="testimonials/story-1.jpg" muted loop playsinline preload="none" disablepictureinpicture oncontextmenu="return false" controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
-            <span class="vt-ph">Story 01<b>drop story-1.mp4</b></span>
-            <span class="vt-chip">28 → 21K in 21 days</span>
-            <span class="vt-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
-            <span class="vt-cap">
-              <span class="vt-name">Alex</span>
-              <span class="vt-role">Founder, Media Removal</span>
-              <span class="vt-line"><i></i></span>
-            </span>
+        <div class=”vt-card rv” role=”button” tabindex=”0”
+             data-src=”testimonials/story-1.mp4”
+             data-poster=”testimonials/story-1.jpg”>
+          <div class=”vt-frame”>
+            <video class=”vt-vid” src=”testimonials/story-1.mp4” poster=”testimonials/story-1.jpg” muted loop playsinline preload=”none” disablepictureinpicture oncontextmenu=”return false” controlslist=”nodownload noplaybackrate noremoteplayback” aria-hidden=”true”></video>
+            <span class=”vt-play” aria-hidden=”true”><svg width=”18” height=”18” viewBox=”0 0 24 24” fill=”#fff”><path d=”M8 5v14l11-7z”/></svg></span>
           </div>
-          <span class="vt-quote">“They promised us 10k. They did <em>double that.</em> Still a bit shocked honestly.”</span>
         </div>
 
-        <div class="vt-card rv d1" role="button" tabindex="0"
-             data-src="testimonials/story-2.mp4"
-             data-poster="testimonials/story-2.jpg"
-             data-name="PAU" data-role="Founder">
-          <div class="vt-frame">
-            <video class="vt-vid" src="testimonials/story-2.mp4" poster="testimonials/story-2.jpg" muted loop playsinline preload="none" disablepictureinpicture oncontextmenu="return false" controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
-            <span class="vt-ph">Story 02<b>drop story-2.mp4</b></span>
-            <span class="vt-chip">5 qualified leads</span>
-            <span class="vt-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
-            <span class="vt-cap">
-              <span class="vt-name">PAU</span>
-              <span class="vt-role">Founder</span>
-              <span class="vt-line"><i></i></span>
-            </span>
+        <div class=”vt-card rv d1” role=”button” tabindex=”0”
+             data-src=”testimonials/story-2.mp4”
+             data-poster=”testimonials/story-2.jpg”>
+          <div class=”vt-frame”>
+            <video class=”vt-vid” src=”testimonials/story-2.mp4” poster=”testimonials/story-2.jpg” muted loop playsinline preload=”none” disablepictureinpicture oncontextmenu=”return false” controlslist=”nodownload noplaybackrate noremoteplayback” aria-hidden=”true”></video>
+            <span class=”vt-play” aria-hidden=”true”><svg width=”18” height=”18” viewBox=”0 0 24 24” fill=”#fff”><path d=”M8 5v14l11-7z”/></svg></span>
           </div>
-          <span class="vt-quote">“Got 5 high quality leads for my brand already. <em>Real ones,</em> not random DMs.”</span>
         </div>
 
-        <div class="vt-card rv d2" role="button" tabindex="0"
-             data-src="testimonials/story-3.mp4"
-             data-poster="testimonials/story-3.jpg"
-             data-name="Michelle" data-role="Founder">
-          <div class="vt-frame">
-            <video class="vt-vid" src="testimonials/story-3.mp4" poster="testimonials/story-3.jpg" muted loop playsinline preload="none" disablepictureinpicture oncontextmenu="return false" controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
-            <span class="vt-ph">Story 03<b>drop story-3.mp4</b></span>
-            <span class="vt-chip">5,000 in 3 days</span>
-            <span class="vt-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
-            <span class="vt-cap">
-              <span class="vt-name">Michelle</span>
-              <span class="vt-role">Founder</span>
-              <span class="vt-line"><i></i></span>
-            </span>
+        <div class=”vt-card rv d2” role=”button” tabindex=”0”
+             data-src=”testimonials/story-3.mp4”
+             data-poster=”testimonials/story-3.jpg”>
+          <div class=”vt-frame”>
+            <video class=”vt-vid” src=”testimonials/story-3.mp4” poster=”testimonials/story-3.jpg” muted loop playsinline preload=”none” disablepictureinpicture oncontextmenu=”return false” controlslist=”nodownload noplaybackrate noremoteplayback” aria-hidden=”true”></video>
+            <span class=”vt-play” aria-hidden=”true”><svg width=”18” height=”18” viewBox=”0 0 24 24” fill=”#fff”><path d=”M8 5v14l11-7z”/></svg></span>
           </div>
-          <span class="vt-quote">“5,000 followers in just 3 days. I keep checking to make sure it's <em>real.</em>”</span>
         </div>
       </div>
 
@@ -1651,67 +1602,40 @@ body.preload .world .hero .rv{opacity:0!important;transform:translateY(28px)!imp
     </section>
 
     <!-- CLIENT STORIES · VIDEO TESTIMONIALS -->
-    <section class="stories solid" id="b-stories">
-      <div class="wrap">
-        <div class="head rv">
-          <span class="badge">In their words</span>
-          <h2>The founders,<br><em>unfiltered.</em></h2>
-          <p class="sub">Not a case-study PDF. The actual people we built brands for, on camera, telling you what 90 days did.</p>
+    <section class=”stories solid” id=”b-stories”>
+      <div class=”wrap”>
+        <div class=”head rv”>
+          <span class=”badge”>Testimonials</span>
+          <h2>What clients<br><em>need to say.</em></h2>
+          <p class=”sub”>Real founders, real results. No scripts, no edits, just their story.</p>
         </div>
 
-        <div class="vt-grid">
-          <div class="vt-card rv" role="button" tabindex="0"
-               data-src="testimonials/story-1.mp4"
-               data-poster="testimonials/story-1.jpg"
-               data-name="Alex" data-role="Founder, Media Removal">
-            <div class="vt-frame">
-              <video class="vt-vid" src="testimonials/story-1.mp4" poster="testimonials/story-1.jpg" muted loop playsinline preload="none" disablepictureinpicture oncontextmenu="return false" controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
-              <span class="vt-ph">Story 01<b>drop story-1.mp4</b></span>
-              <span class="vt-chip">28 → 21K in 21 days</span>
-              <span class="vt-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
-              <span class="vt-cap">
-                <span class="vt-name">Alex</span>
-                <span class="vt-role">Founder, Media Removal</span>
-                <span class="vt-line"><i></i></span>
-              </span>
+        <div class=”vt-grid”>
+          <div class=”vt-card rv” role=”button” tabindex=”0”
+               data-src=”testimonials/story-1.mp4”
+               data-poster=”testimonials/story-1.jpg”>
+            <div class=”vt-frame”>
+              <video class=”vt-vid” src=”testimonials/story-1.mp4” poster=”testimonials/story-1.jpg” muted loop playsinline preload=”none” disablepictureinpicture oncontextmenu=”return false” controlslist=”nodownload noplaybackrate noremoteplayback” aria-hidden=”true”></video>
+              <span class=”vt-play” aria-hidden=”true”><svg width=”18” height=”18” viewBox=”0 0 24 24” fill=”#fff”><path d=”M8 5v14l11-7z”/></svg></span>
             </div>
-            <span class="vt-quote">“We started at 28 followers. <em>Twenty-one thousand</em> three weeks later.”</span>
           </div>
 
-          <div class="vt-card rv d1" role="button" tabindex="0"
-               data-src="testimonials/story-2.mp4"
-               data-poster="testimonials/story-2.jpg"
-               data-name="PAU" data-role="Founder">
-            <div class="vt-frame">
-              <video class="vt-vid" src="testimonials/story-2.mp4" poster="testimonials/story-2.jpg" muted loop playsinline preload="none" disablepictureinpicture oncontextmenu="return false" controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
-              <span class="vt-ph">Story 02<b>drop story-2.mp4</b></span>
-              <span class="vt-chip">5 qualified leads</span>
-              <span class="vt-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
-              <span class="vt-cap">
-                <span class="vt-name">PAU</span>
-                <span class="vt-role">Founder</span>
-                <span class="vt-line"><i></i></span>
-              </span>
+          <div class=”vt-card rv d1” role=”button” tabindex=”0”
+               data-src=”testimonials/story-2.mp4”
+               data-poster=”testimonials/story-2.jpg”>
+            <div class=”vt-frame”>
+              <video class=”vt-vid” src=”testimonials/story-2.mp4” poster=”testimonials/story-2.jpg” muted loop playsinline preload=”none” disablepictureinpicture oncontextmenu=”return false” controlslist=”nodownload noplaybackrate noremoteplayback” aria-hidden=”true”></video>
+              <span class=”vt-play” aria-hidden=”true”><svg width=”18” height=”18” viewBox=”0 0 24 24” fill=”#fff”><path d=”M8 5v14l11-7z”/></svg></span>
             </div>
-            <span class="vt-quote">“The leads started coming in before I'd even <em>finished onboarding.</em>”</span>
           </div>
 
-          <div class="vt-card rv d2" role="button" tabindex="0"
-               data-src="testimonials/story-3.mp4"
-               data-poster="testimonials/story-3.jpg"
-               data-name="Michelle" data-role="Founder">
-            <div class="vt-frame">
-              <video class="vt-vid" src="testimonials/story-3.mp4" poster="testimonials/story-3.jpg" muted loop playsinline preload="none" disablepictureinpicture oncontextmenu="return false" controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
-              <span class="vt-ph">Story 03<b>drop story-3.mp4</b></span>
-              <span class="vt-chip">5,000 in 3 days</span>
-              <span class="vt-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
-              <span class="vt-cap">
-                <span class="vt-name">Michelle</span>
-                <span class="vt-role">Founder</span>
-                <span class="vt-line"><i></i></span>
-              </span>
+          <div class=”vt-card rv d2” role=”button” tabindex=”0”
+               data-src=”testimonials/story-3.mp4”
+               data-poster=”testimonials/story-3.jpg”>
+            <div class=”vt-frame”>
+              <video class=”vt-vid” src=”testimonials/story-3.mp4” poster=”testimonials/story-3.jpg” muted loop playsinline preload=”none” disablepictureinpicture oncontextmenu=”return false” controlslist=”nodownload noplaybackrate noremoteplayback” aria-hidden=”true”></video>
+              <span class=”vt-play” aria-hidden=”true”><svg width=”18” height=”18” viewBox=”0 0 24 24” fill=”#fff”><path d=”M8 5v14l11-7z”/></svg></span>
             </div>
-            <span class="vt-quote">“I showed up for one recording day. <em>They ran everything else.</em>”</span>
           </div>
         </div>
 
@@ -2324,8 +2248,6 @@ const Smoke = (() => {
       const s = stories[idx];
       vid.src = s.src;
       vid.poster = s.poster;
-      nameEl.textContent = s.name;
-      roleEl.textContent = s.role;
       curEl.textContent = idx + 1;
       document.body.classList.add('vt-lock');
       lb.classList.add('open');

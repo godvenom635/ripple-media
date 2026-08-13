@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', Helvetica, Arial, sans-serif;
+      background: #ffffff;
+      color: #0a0a0a;
+      font-size: 11.5pt;
+      line-height: 1.75;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .page {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 60px 64px 80px;
+    }
+
+    /* ── COVER ── */
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 64px;
+      background: #050507;
+      color: #fff;
+      page-break-after: always;
+    }
+
+    .cover-logo {
+      font-size: 28pt;
+      font-weight: 900;
+      letter-spacing: -1px;
+      color: #f59e0b;
+      margin-bottom: 48px;
+    }
+
+    .cover-logo span { color: #fcd34d; }
+
+    .cover-title {
+      font-size: 42pt;
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      margin-bottom: 24px;
+    }
+
+    .cover-title em {
+      font-style: normal;
+      color: #f59e0b;
+    }
+
+    .cover-sub {
+      font-size: 13pt;
+      color: rgba(255,255,255,0.45);
+      font-weight: 400;
+      margin-bottom: 60px;
+    }
+
+    .cover-meta {
+      display: flex;
+      gap: 40px;
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .meta-label {
+      font-size: 8.5pt;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+    }
+
+    .meta-value {
+      font-size: 13pt;
+      font-weight: 700;
+      color: #fbbf24;
+    }
+
+    .cover-line {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(245,158,11,0.4) 50%, transparent);
+      margin: 48px 0;
+    }
+
+    /* ── SCRIPT BODY ── */
+    .section {
+      margin-bottom: 42px;
+    }
+
+    .section-tag {
+      display: inline-block;
+      font-size: 7.5pt;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #f59e0b;
+      background: rgba(245,158,11,0.08);
+      border: 1px solid rgba(245,158,11,0.2);
+      border-radius: 4px;
+      padding: 3px 10px;
+      margin-bottom: 14px;
+    }
+
+    .section-body {
+      font-size: 11.5pt;
+      line-height: 1.85;
+      color: #1a1a1a;
+    }
+
+    .section-body p {
+      margin-bottom: 10px;
+    }
+
+    .section-body strong {
+      font-weight: 800;
+      color: #050507;
+    }
+
+    .section-body em {
+      font-style: italic;
+      color: #444;
+    }
+
+    .section-body .big-line {
+      font-size: 14pt;
+      font-weight: 800;
+      color: #050507;
+      letter-spacing: -0.3px;
+      line-height: 1.45;
+      display: block;
+      margin: 16px 0;
+    }
+
+    /* placeholder styling */
+    .ph {
+      color: #f59e0b;
+      background: rgba(245,158,11,0.07);
+      border-radius: 3px;
+      padding: 1px 5px;
+      font-weight: 700;
+      font-size: 10.5pt;
+    }
+
+    /* delivery note */
+    .delivery-note {
+      margin-top: 16px;
+      padding: 12px 16px;
+      background: #f9f7f3;
+      border-left: 3px solid #f59e0b;
+      border-radius: 0 6px 6px 0;
+      font-size: 10pt;
+      color: #555;
+      font-style: italic;
+    }
+
+    /* divider */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: #e8e8e8;
+      margin: 36px 0;
+    }
+
+    /* timing row */
+    .timing-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 40px;
+      font-size: 10.5pt;
+    }
+
+    .timing-table th {
+      text-align: left;
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #999;
+      padding: 8px 0;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .timing-table td {
+      padding: 10px 0;
+      border-bottom: 1px solid #f0f0f0;
+      color: #333;
+    }
+
+    .timing-table td:last-child {
+      color: #f59e0b;
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .timing-table tr.total td {
+      font-weight: 800;
+      color: #050507;
+      border-top: 2px solid #0a0a0a;
+      border-bottom: none;
+      padding-top: 12px;
+    }
+
+    .timing-table tr.total td:last-child {
+      color: #f59e0b;
+    }
+
+    /* placeholder checklist */
+    .checklist {
+      margin-top: 40px;
+      page-break-before: always;
+      padding-top: 60px;
+    }
+
+    .checklist-title {
+      font-size: 16pt;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      margin-bottom: 6px;
+    }
+
+    .checklist-sub {
+      font-size: 10.5pt;
+      color: #888;
+      margin-bottom: 28px;
+    }
+
+    .check-item {
+      display: flex;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid #f0f0f0;
+      align-items: flex-start;
+    }
+
+    .check-box {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #d0d0d0;
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .check-label {
+      font-size: 10.5pt;
+    }
+
+    .check-label strong {
+      display: block;
+      font-weight: 700;
+      color: #0a0a0a;
+      margin-bottom: 2px;
+    }
+
+    .check-label span {
+      color: #888;
+      font-size: 9.5pt;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- COVER PAGE -->
+  <div class="cover">
+    <div class="cover-logo">ripple<span>.</span></div>
+
+    <div class="cover-title">
+      VSL Script<br>
+      <em>Final Version</em>
+    </div>
+    <div class="cover-sub">Video Sales Letter — Landing Page</div>
+
+    <div class="cover-line"></div>
+
+    <div class="cover-meta">
+      <div class="meta-item">
+        <span class="meta-label">Runtime</span>
+        <span class="meta-value">~7–8 min</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Audience</span>
+        <span class="meta-value">Founders · Podcasters · Creators</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Version</span>
+        <span class="meta-value">v8 — Final</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPT BODY -->
+  <div class="page">
+
+    <!-- HOOK -->
+    <div class="section">
+      <div class="section-tag">Hook — 0:00</div>
+      <div class="section-body">
+        <p>If you're already making content —</p>
+        <p>recording, showing up, putting in the hours —</p>
+        <p>but your reach is still nowhere near where it should be for the quality you're putting out…</p>
+        <span class="big-line">this is the most important video you'll watch this year.</span>
+        <p>I'm not going to tell you to post more, record better, or fix your hooks.</p>
+        <p>You're already doing the work. The problem is something else entirely.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- INTRO -->
+    <div class="section">
+      <div class="section-tag">Your Intro — 0:28</div>
+      <div class="section-body">
+        <p>My name is <strong>Ashish Kumawat</strong> — I'm the founder of <strong>Ripple Media.</strong></p>
+        <p>I've spent the last <span class="ph">[X] years</span> in content marketing. I run <strong>@smmguy</strong> on Instagram where I've built <span class="ph">[8,000+] followers</span> teaching distribution and content strategy to founders.</p>
+        <p>More importantly — here's what we've done for the people we work with:</p>
+        <p><span class="ph">[Client name]</span> went from <span class="ph">[X views]</span> per video to <span class="ph">[X million views]</span> — same content, nothing new recorded.</p>
+        <p><span class="ph">[Client name]</span> grew by <span class="ph">[X,000] followers</span> across platforms in under <span class="ph">[X] days.</span></p>
+        <p>Across everything we manage, we've driven over <span class="ph">[X] million views</span> for founders, podcasters, and creators in the last <span class="ph">[X] months.</span></p>
+        <p>I'm not here to sell you a course or give you a checklist.</p>
+        <p>I built a system — and I'm going to show you exactly how it works.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ISPEEDSPEED -->
+    <div class="section">
+      <div class="section-tag">The IShowSpeed Moment — 1:28</div>
+      <div class="section-body">
+        <p>Do you know who IShowSpeed is?</p>
+        <p>Of course you do.</p>
+        <p>Have you ever watched one of his 4-hour streams?</p>
+        <p>Probably not.</p>
+        <p>Most people who know IShowSpeed have never watched a full stream in their life. Same with KSI. Same with MrBeast — 300 million subscribers, but the number of people who recognise his face is five, ten times that.</p>
+        <p>People who've never subscribed. Never visited his channel. Never watched a single video.</p>
+        <p>They still know exactly who he is.</p>
+        <p>That's not talent. That's not the algorithm.</p>
+        <span class="big-line">That's distribution.</span>
+        <p>Every wild moment — clipped. Every best line — trimmed to 30 seconds and spread across every platform, in front of people who would never have found the original.</p>
+        <p>The stream was the content. The clips were the distribution.</p>
+        <span class="big-line">And the distribution is why they're famous.</span>
+        <p>Here's where you are:</p>
+        <p>You're doing the stream. You're creating real, valuable content. But you have no distribution layer.</p>
+        <p>Your video goes up, reaches the same small audience, and dies in 48 hours.</p>
+        <p>The people who need to hear what you have to say — who would follow you, buy from you, tell everyone about you — will never stumble onto your account.</p>
+        <p>Not because your content isn't good enough.</p>
+        <span class="big-line">Because nobody is spreading it.</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- THE GAP -->
+    <div class="section">
+      <div class="section-tag">The Gap — 3:23</div>
+      <div class="section-body">
+        <p>You open Instagram. You open LinkedIn.</p>
+        <p>And you see someone in your niche — weaker content, less experience, less to say — but they're <em>everywhere.</em> Millions of views. Inbound DMs. Brands reaching out.</p>
+        <p>What do they have that you don't?</p>
+        <span class="big-line">Distribution. That's it. That's the whole gap.</span>
+        <p>Right now you're waiting to be discovered.</p>
+        <span class="big-line">Distribution means you stop waiting and start spreading.</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- WHY EDITORS DON'T WORK -->
+    <div class="section">
+      <div class="section-tag">Why Editors Don't Work — 4:03</div>
+      <div class="section-body">
+        <p>Some of you have tried this.</p>
+        <p>You went on Whop. You ran a bounty campaign. You put in $10,000, launched it, and waited.</p>
+        <p>And what did you actually get?</p>
+        <p>Random editors picking up your content. Some post it. Some don't. Some post it once and disappear. You have zero visibility into what's happening, zero control over what goes out, and zero say in how your brand is represented.</p>
+        <p>And here's the part nobody talks about —</p>
+        <span class="big-line">The editor controls your content more than you do.</span>
+        <p>They own the page. They own the account. They own the audience sitting on that page.</p>
+        <p>The moment an editor gets bored, pivots their niche, or just decides to delete their account — your content is gone. Your audience is gone. Everything you paid for, everything you built on that page — gone overnight.</p>
+        <p>You invested $10,000 hoping for views. What you actually bought was someone else's control over your brand.</p>
+        <p>Ripple is the opposite.</p>
+        <p>A distribution layer that costs <strong>90 times less</strong> than running a clipping operation — and gives you <strong>10x to 50x more reach, more control, and more authority</strong> than any bounty campaign ever will.</p>
+        <p>Because with Ripple, every account, every video, every view — goes back to you.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- RIPPLE SYSTEM -->
+    <div class="section">
+      <div class="section-tag">The Ripple System — 5:13</div>
+      <div class="section-body">
+        <p>We take your existing content — the videos you're already making — and run them through a multi-platform distribution system.</p>
+        <p>Same content. Multiple accounts. Instagram, TikTok, YouTube Shorts — simultaneously.</p>
+        <p>Exactly like IShowSpeed. He streams for 4 hours. By the end of the week, the best moments have been seen by 50 million people who never watched the stream.</p>
+        <span class="big-line">That's the model we run for you.</span>
+        <p>And every account we build belongs to you. Your brand. Your pages. Your audience. Your asset — permanently.</p>
+        <p>A video that gets 400 views when you post it alone can reach 400,000 people when it's properly distributed.</p>
+        <p>Not because the content changed. Because the right people are finally seeing it.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- GUARANTEE -->
+    <div class="section">
+      <div class="section-tag">Guarantee — 6:18</div>
+      <div class="section-body">
+        <p>Here's our promise.</p>
+        <p>If you work with us and you don't get <strong>at least 20x the reach you're getting right now — within 90 days — we give you every rupee back.</strong></p>
+        <p>Every single penny. No questions.</p>
+        <p>Which means if it doesn't work, you essentially built your entire distribution infrastructure for free.</p>
+        <p>We push out a minimum of <strong>5,000 videos of you per month</strong> — across platforms, across accounts, consistently, every single day.</p>
+        <p>5,000 pieces of your content, your face, your message — in motion. Every month.</p>
+        <p>That's the machine. And it either delivers 20x your reach in 90 days, or you pay nothing.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- FUTURE PACING -->
+    <div class="section">
+      <div class="section-tag">Future Pacing — 7:00</div>
+      <div class="section-body">
+        <p>I want you to picture something.</p>
+        <p>You wake up tomorrow morning.</p>
+        <p>You pick up your phone — and you see it. 5,000 videos of you. Your content. Your face. Your ideas. Spreading across Instagram, TikTok, YouTube Shorts — right now, while you were sleeping.</p>
+        <p>You open Instagram and someone from your city has shared your video.</p>
+        <p>You open TikTok and a founder in your niche is watching a clip of something you said three weeks ago — for the first time.</p>
+        <p>You open LinkedIn and someone tags you saying — <em>"this is the guy you need to watch."</em></p>
+        <p>People in your space are opening their phones — and it's you.</p>
+        <p>On their feed — you. On their explore page — you. In their DMs, being shared by someone they trust — you.</p>
+        <span class="big-line">You didn't post more. You didn't go viral. You didn't get lucky with the algorithm.</span>
+        <p>You just finally control what people see.</p>
+        <p>Think about that. <strong>You control your distribution.</strong> Not an editor. Not a platform. Not a bounty campaign. You decide what message goes out, how it's framed, and who sees it — and then 5,000 versions of that message go out every single month without you touching anything.</p>
+        <p>Your competitors are posting once a day hoping the algorithm picks them up.</p>
+        <span class="big-line">You are everywhere.</span>
+        <p>Every founder in your niche, every potential client, every person who needs to hear what you have to say — they're not going to stumble across you anymore.</p>
+        <p>They're going to feel like you're already the biggest name in the room.</p>
+        <p>Because everywhere they look — it's you.</p>
+        <p>That's not luck. That's not virality. That's a distribution system running for you 24 hours a day.</p>
+        <p>And it starts the moment you book a call.</p>
+      </div>
+      <div class="delivery-note">
+        📌 Delivery note: Slow all the way down here. Let each image land before you move to the next. The more specific and visual you make it, the more the viewer sees themselves in it. That's what books the call.
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- CTA -->
+    <div class="section">
+      <div class="section-tag">CTA — 8:10</div>
+      <div class="section-body">
+        <p>Click the button below.</p>
+        <p>Fill out the short form — tell me what you create, who it's for, drop 2–3 names in your niche.</p>
+        <p>Pick a time for your call.</p>
+        <p>Before we speak, you'll get a <strong>Distribution Audit</strong> in your inbox — where your competitors are getting their reach, and what your content could realistically do with proper distribution.</p>
+        <span class="big-line"><span class="ph">[X] spots open. When they're gone, they're gone.</span></span>
+        <p>You're already doing the hard part.</p>
+        <span class="big-line">Let Ripple handle the rest.</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- TIMING TABLE -->
+    <table class="timing-table">
+      <tr>
+        <th>Section</th>
+        <th style="text-align:right;">Time</th>
+      </tr>
+      <tr><td>Hook</td><td>0:28</td></tr>
+      <tr><td>Your Intro</td><td>1:00</td></tr>
+      <tr><td>IShowSpeed Moment</td><td>1:55</td></tr>
+      <tr><td>The Gap</td><td>0:40</td></tr>
+      <tr><td>Why Editors Don't Work</td><td>1:10</td></tr>
+      <tr><td>The Ripple System</td><td>1:05</td></tr>
+      <tr><td>Guarantee</td><td>0:42</td></tr>
+      <tr><td>Future Pacing</td><td>1:10</td></tr>
+      <tr><td>CTA</td><td>0:35</td></tr>
+      <tr class="total">
+        <td>Total</td>
+        <td>~7:45</td>
+      </tr>
+    </table>
+
+    <!-- PLACEHOLDER CHECKLIST -->
+    <div class="checklist">
+      <div class="checklist-title">Before You Shoot — Fill These In</div>
+      <div class="checklist-sub">Replace every highlighted placeholder with your real numbers.</div>
+
+      <div class="check-item">
+        <div class="check-box"></div>
+        <div class="check-label">
+          <strong>[X] years in content marketing</strong>
+          <span>Your actual years of experience</span>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box"></div>
+        <div class="check-label">
+          <strong>[Client name] → [X million views]</strong>
+          <span>Your single best case study — name + result</span>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box"></div>
+        <div class="check-label">
+          <strong>[Client name] → [X,000] followers</strong>
+          <span>Second best result — follower growth</span>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box"></div>
+        <div class="check-label">
+          <strong>[X] million views total</strong>
+          <span>Combined views generated across all clients</span>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box"></div>
+        <div class="check-label">
+          <strong>[X] months</strong>
+          <span>How long Ripple has been running</span>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box"></div>
+        <div class="check-label">
+          <strong>[X] spots open</strong>
+          <span>How many client spots you're opening — keep it real and limited</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
