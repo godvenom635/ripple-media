@@ -2240,11 +2240,12 @@ const Smoke = (() => {
     const btnNext = lb.querySelector('.vt-next');
 
     let stories = [];
-    let current = -1;
+    let currentVid = -1;
+    let currentWorld = 'd';
 
     function openLb(idx){
       if (idx < 0 || idx >= stories.length) return;
-      current = idx;
+      currentVid = idx;
       const s = stories[idx];
       vid.src = s.src;
       vid.poster = s.poster;
@@ -2262,7 +2263,7 @@ const Smoke = (() => {
         document.body.classList.remove('vt-lock');
         vid.pause();
         vid.src = '';
-        current = -1;
+        currentVid = -1;
       }, 420);
     }
 
@@ -2274,8 +2275,6 @@ const Smoke = (() => {
         stories.push({
           src: c.dataset.src,
           poster: c.dataset.poster,
-          name: c.dataset.name,
-          role: c.dataset.role,
           el: c
         });
       });
@@ -2295,12 +2294,12 @@ const Smoke = (() => {
 
     btnX.addEventListener('click', closeLb);
     btnPrev.addEventListener('click', () => {
-      if (current > 0) openLb(current - 1);
-      else if (current === 0) openLb(stories.length - 1);
+      if (currentVid > 0) openLb(currentVid - 1);
+      else if (currentVid === 0) openLb(stories.length - 1);
     });
     btnNext.addEventListener('click', () => {
-      if (current < stories.length - 1) openLb(current + 1);
-      else if (current === stories.length - 1) openLb(0);
+      if (currentVid < stories.length - 1) openLb(currentVid + 1);
+      else if (currentVid === stories.length - 1) openLb(0);
     });
     lb.addEventListener('click', e => {
       if (e.target === lb) closeLb();
@@ -2314,17 +2313,16 @@ const Smoke = (() => {
 
     /* init stories in the live world + re-init when world switches */
     function initStories(){
-      const live = current === 'd' ? worldD : worldB;
-      loadStories(current);
+      loadStories(currentWorld);
     }
 
     initStories();
     const origFlip = window.flip || (() => {});
     window.flip = function(target){
-      if (target === current) return;
-      current = target;
-      const from = current === 'd' ? worldD : worldB;
+      if (target === currentWorld) return;
+      const from = currentWorld === 'd' ? worldD : worldB;
       const to = target === 'd' ? worldD : worldB;
+      currentWorld = target;
       initWorld(to);
       if (RM){
         from.style.display = 'none';
