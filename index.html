@@ -284,11 +284,12 @@ h1 em,h2 em{
 .vt-grid > :nth-child(1){margin-top:36px}
 .vt-grid > :nth-child(3){margin-top:70px}
 
-.vt-card{position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent;outline:none}
+.vt-card{position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent;outline:none;width:100%}
 .vt-frame{
   position:relative;aspect-ratio:9/16;border-radius:22px;overflow:hidden;
   border:1px solid var(--line);background:var(--panel);
   transition:transform .55s cubic-bezier(.2,.8,.3,1),border-color .45s ease,box-shadow .55s ease;
+  width:100%;
 }
 .vt-card:hover .vt-frame,.vt-card:focus-visible .vt-frame{
   transform:translateY(-9px);border-color:rgba(255,255,255,.32);
