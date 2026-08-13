@@ -287,9 +287,9 @@ h1 em,h2 em{
 .vt-card{position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent;outline:none;width:100%}
 .vt-frame{
   position:relative;aspect-ratio:9/16;border-radius:22px;overflow:hidden;
-  border:1px solid var(--line);background:var(--panel);
+  border:1px solid var(--line);background:linear-gradient(135deg,var(--panel),rgba(255,255,255,.02));
   transition:transform .55s cubic-bezier(.2,.8,.3,1),border-color .45s ease,box-shadow .55s ease;
-  width:100%;
+  width:100%;min-height:300px;
 }
 .vt-card:hover .vt-frame,.vt-card:focus-visible .vt-frame{
   transform:translateY(-9px);border-color:rgba(255,255,255,.32);
@@ -1158,7 +1158,7 @@ body.preload .world .hero .rv{opacity:0!important;transform:translateY(28px)!imp
       <div class="grid">
         <div class="card rv">
           <div class="clip-thumb" style="background-image:url('clips/clip-1.jpg')">
-            <video class="clip-vid" src="clips/clip-1.mp4" poster="clips/clip-1.jpg" muted loop playsinline preload="none" disablepictureinpicture oncontextmenu="return false" controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
+            <video class="clip-vid" src="clips/clip-1.mp4" poster="clips/clip-1.jpg" muted loop playsinline preload="metadata" disablepictureinpicture oncontextmenu="return false" controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
             <span class="clip-meta">YouTube · 8.5M views</span>
           </div>
         </div>
@@ -1169,7 +1169,7 @@ body.preload .world .hero .rv{opacity:0!important;transform:translateY(28px)!imp
         </div>
         <div class="card rv d2">
           <div class="clip-thumb" style="background-image:url('clips/clip-2.jpg')">
-            <video class="clip-vid" src="clips/clip-2.mp4" poster="clips/clip-2.jpg" muted loop playsinline preload="none" disablepictureinpicture oncontextmenu="return false" controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
+            <video class="clip-vid" src="clips/clip-2.mp4" poster="clips/clip-2.jpg" muted loop playsinline preload="metadata" disablepictureinpicture oncontextmenu="return false" controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
             <span class="clip-meta">Instagram · 4.2M views</span>
           </div>
         </div>
@@ -1180,7 +1180,7 @@ body.preload .world .hero .rv{opacity:0!important;transform:translateY(28px)!imp
         </div>
         <div class="card rv d1">
           <div class="clip-thumb" style="background-image:url('clips/clip-3.jpg')">
-            <video class="clip-vid" src="clips/clip-3.mp4" poster="clips/clip-3.jpg" muted loop playsinline preload="none" disablepictureinpicture oncontextmenu="return false" controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
+            <video class="clip-vid" src="clips/clip-3.mp4" poster="clips/clip-3.jpg" muted loop playsinline preload="metadata" disablepictureinpicture oncontextmenu="return false" controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
             <span class="clip-meta">YouTube · 9.6M views</span>
           </div>
         </div>
