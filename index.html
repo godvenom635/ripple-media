@@ -362,47 +362,15 @@ h1 em,h2 em{
 .vt-card.no-src .vt-role{color:var(--faint)}
 .vt-card.no-src .vt-line{background:var(--line)}
 
-/* ---- lightbox (always dark, shared by both worlds) ---- */
-body.vt-lock{overflow:hidden}
-#vt-lb{
-  position:fixed;inset:0;z-index:400;display:none;
-  align-items:center;justify-content:center;padding:34px 24px;
-  background:rgba(0,0,0,.86);
-  -webkit-backdrop-filter:blur(24px) saturate(.75);backdrop-filter:blur(24px) saturate(.75);
-  opacity:0;transition:opacity .4s ease;
-}
-#vt-lb.open{display:flex}
-#vt-lb.show{opacity:1}
-.vt-stage{
-  position:relative;display:flex;flex-direction:column;align-items:center;gap:22px;
-  opacity:0;transform:translateY(20px) scale(.97);
-  transition:opacity .45s ease,transform .55s cubic-bezier(.2,.8,.3,1);
-}
-#vt-lb.show .vt-stage{opacity:1;transform:none}
-.vt-stage video{
-  max-height:74vh;max-width:min(90vw,860px);width:auto;height:auto;
-  border-radius:20px;border:1px solid rgba(255,255,255,.16);background:#000;display:block;
-  box-shadow:0 44px 130px rgba(0,0,0,.75), 0 0 90px rgba(255,255,255,.06);
-}
-.vt-lb-cap{
-  display:none;
-}
-.vt-count{
-  position:absolute;top:-34px;left:50%;transform:translateX(-50%);
-  font-size:11.5px;letter-spacing:.2em;color:rgba(255,255,255,.42);font-variant-numeric:tabular-nums;
-}
-.vt-ctl{
-  position:fixed;z-index:2;display:flex;align-items:center;justify-content:center;
-  width:46px;height:46px;border-radius:50%;cursor:pointer;
-  border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.06);color:#fff;
-  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
-  transition:background .3s ease,border-color .3s ease,transform .3s ease;
-}
-.vt-ctl:hover{background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.5);transform:scale(1.06)}
-.vt-ctl:focus-visible{border-color:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.2)}
-.vt-x{top:26px;right:28px}
-.vt-prev{left:28px;top:50%;margin-top:-23px}
-.vt-next{right:28px;top:50%;margin-top:-23px}
+/* ---- playing state: the button steps out of the way, colour comes up ---- */
+.vt-card.playing .vt-vid{filter:none;transform:none}
+.vt-card.playing .vt-play{opacity:0;transform:translate(-50%,-50%) scale(.92)}
+.vt-card.playing:hover .vt-play,
+.vt-card.playing:focus-visible .vt-play{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.vt-card.playing .vt-play::before{animation:none;opacity:0}
+.vt-play .ic-pause{display:none}
+.vt-card.playing .vt-play .ic-play{display:none}
+.vt-card.playing .vt-play .ic-pause{display:block}
 
 /* ---------- about ---------- */
 .about{padding:140px 0}
@@ -712,7 +680,6 @@ footer{
   .vt-grid{gap:16px}
   .vt-quote{font-size:14px;margin-top:18px}
   .vt-play{width:54px;height:54px}
-  .vt-prev,.vt-next{top:auto;bottom:26px;margin-top:0}
 }
 /* mobile: the wall becomes a snap-scrolling reel of stories */
 @media (max-width:700px){
@@ -727,7 +694,6 @@ footer{
   .vt-foot{margin-top:52px}
   .vt-foot .btn{width:100%;justify-content:center}
   .vt-btns{width:100%}
-  .vt-x{top:18px;right:18px}
 }
 @media (max-width:640px){
   .hide-sm{display:none}
@@ -763,7 +729,7 @@ footer{
   .mq-track,.mq-track.rev,.mouse::after,.about-visual .rings i,
   .badge::before,.floater,.mk-laptop,.laptop-screen::before,.vt-play::before,
   .mk-about,#pmark .r1,#pmark .r2,#pmark .r3,#pmark .core{animation:none!important}
-  .vt-frame,.vt-vid,.vt-card::before,.vt-stage{transition:none}
+  .vt-frame,.vt-vid,.vt-card::before,.vt-play{transition:none}
   .vt-vid{filter:grayscale(0)}
   #dust{display:none}
   .floater{opacity:0}
@@ -1076,16 +1042,6 @@ body.preload .world .hero .rv{opacity:0!important;transform:translateY(28px)!imp
 </svg>
 
 <!-- ============ INTRO PORTAL (laptop / desktop only) ============ -->
-<!-- ============ VIDEO TESTIMONIALS LIGHTBOX ============ -->
-<div id="vt-lb">
-  <button class="vt-ctl vt-x" type="button" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6l-12 12M6 6l12 12"/></svg></button>
-  <button class="vt-ctl vt-prev" type="button" aria-label="Previous story"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 19l-7-7 7-7"/></svg></button>
-  <button class="vt-ctl vt-next" type="button" aria-label="Next story"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 19l7-7-7-7"/></svg></button>
-  <div class="vt-stage">
-    <video src="" controls playsinline crossorigin="anonymous"></video>
-    <div class="vt-count"><span class="cur">1</span> / <span class="tot">3</span></div>
-  </div>
-</div>
 
 <div id="intro" role="button" tabindex="0" aria-label="Enter the ripple site">
   <button class="intro-skip" type="button" aria-label="Skip intro">Skip</button>
@@ -1200,20 +1156,20 @@ body.preload .world .hero .rv{opacity:0!important;transform:translateY(28px)!imp
       <div class="vt-grid">
         <div class="vt-card rv" role="button" tabindex="0" data-src="testimonials/story-1.mp4">
           <div class="vt-frame">
-            <video class="vt-vid" src="testimonials/story-1.mp4" poster="testimonials/story-1.jpg" muted loop playsinline preload="metadata" disablepictureinpicture controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
-            <span class="vt-play" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
+            <video class="vt-vid" src="testimonials/story-1.mp4" poster="testimonials/story-1.jpg" muted playsinline preload="metadata" disablepictureinpicture controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
+            <span class="vt-play" aria-hidden="true"><svg class="ic-play" width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg><svg class="ic-pause" width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M7 5h3.4v14H7zM13.6 5H17v14h-3.4z"/></svg></span>
           </div>
         </div>
         <div class="vt-card rv d1" role="button" tabindex="0" data-src="testimonials/story-2.mp4">
           <div class="vt-frame">
-            <video class="vt-vid" src="testimonials/story-2.mp4" poster="testimonials/story-2.jpg" muted loop playsinline preload="metadata" disablepictureinpicture controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
-            <span class="vt-play" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
+            <video class="vt-vid" src="testimonials/story-2.mp4" poster="testimonials/story-2.jpg" muted playsinline preload="metadata" disablepictureinpicture controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
+            <span class="vt-play" aria-hidden="true"><svg class="ic-play" width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg><svg class="ic-pause" width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M7 5h3.4v14H7zM13.6 5H17v14h-3.4z"/></svg></span>
           </div>
         </div>
         <div class="vt-card rv d2" role="button" tabindex="0" data-src="testimonials/story-3.mp4">
           <div class="vt-frame">
-            <video class="vt-vid" src="testimonials/story-3.mp4" poster="testimonials/story-3.jpg" muted loop playsinline preload="metadata" disablepictureinpicture controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
-            <span class="vt-play" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
+            <video class="vt-vid" src="testimonials/story-3.mp4" poster="testimonials/story-3.jpg" muted playsinline preload="metadata" disablepictureinpicture controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
+            <span class="vt-play" aria-hidden="true"><svg class="ic-play" width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg><svg class="ic-pause" width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M7 5h3.4v14H7zM13.6 5H17v14h-3.4z"/></svg></span>
           </div>
         </div>
       </div>
@@ -1597,20 +1553,20 @@ body.preload .world .hero .rv{opacity:0!important;transform:translateY(28px)!imp
         <div class="vt-grid">
           <div class="vt-card rv" role="button" tabindex="0" data-src="testimonials/story-1.mp4">
             <div class="vt-frame">
-              <video class="vt-vid" src="testimonials/story-1.mp4" poster="testimonials/story-1.jpg" muted loop playsinline preload="metadata" disablepictureinpicture controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
-              <span class="vt-play" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
+              <video class="vt-vid" src="testimonials/story-1.mp4" poster="testimonials/story-1.jpg" muted playsinline preload="metadata" disablepictureinpicture controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
+              <span class="vt-play" aria-hidden="true"><svg class="ic-play" width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg><svg class="ic-pause" width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M7 5h3.4v14H7zM13.6 5H17v14h-3.4z"/></svg></span>
             </div>
           </div>
           <div class="vt-card rv d1" role="button" tabindex="0" data-src="testimonials/story-2.mp4">
             <div class="vt-frame">
-              <video class="vt-vid" src="testimonials/story-2.mp4" poster="testimonials/story-2.jpg" muted loop playsinline preload="metadata" disablepictureinpicture controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
-              <span class="vt-play" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
+              <video class="vt-vid" src="testimonials/story-2.mp4" poster="testimonials/story-2.jpg" muted playsinline preload="metadata" disablepictureinpicture controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
+              <span class="vt-play" aria-hidden="true"><svg class="ic-play" width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg><svg class="ic-pause" width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M7 5h3.4v14H7zM13.6 5H17v14h-3.4z"/></svg></span>
             </div>
           </div>
           <div class="vt-card rv d2" role="button" tabindex="0" data-src="testimonials/story-3.mp4">
             <div class="vt-frame">
-              <video class="vt-vid" src="testimonials/story-3.mp4" poster="testimonials/story-3.jpg" muted loop playsinline preload="metadata" disablepictureinpicture controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
-              <span class="vt-play" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>
+              <video class="vt-vid" src="testimonials/story-3.mp4" poster="testimonials/story-3.jpg" muted playsinline preload="metadata" disablepictureinpicture controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
+              <span class="vt-play" aria-hidden="true"><svg class="ic-play" width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg><svg class="ic-pause" width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M7 5h3.4v14H7zM13.6 5H17v14h-3.4z"/></svg></span>
             </div>
           </div>
         </div>
@@ -2201,76 +2157,43 @@ const Smoke = (() => {
   });
 
   /* ============================================================
-     VIDEO TESTIMONIALS - a card opens in the on-page lightbox.
-     Delegated, so it covers both worlds with no re-init on flip.
+     VIDEO TESTIMONIALS - a card plays in place. Click to play,
+     click again to pause. No overlay, no popup, no navigation.
      ============================================================ */
   (function(){
-    const lb = document.getElementById('vt-lb');
-    if (!lb) return;
-    const vid    = lb.querySelector('video');
-    const curEl  = lb.querySelector('.cur');
-    const totEl  = lb.querySelector('.tot');
-    const btnX   = lb.querySelector('.vt-x');
-    const btnPrev= lb.querySelector('.vt-prev');
-    const btnNext= lb.querySelector('.vt-next');
+    const vids = document.querySelectorAll('.vt-vid');
+    if (!vids.length) return;
 
-    let list = [], idx = -1;
-
-    function show(i){
-      if (!list.length) return;
-      idx = (i + list.length) % list.length;
-      const card = list[idx];
-      const inner = card.querySelector('video');
-      vid.src = card.dataset.src;
-      vid.poster = inner ? inner.getAttribute('poster') : '';
-      curEl.textContent = idx + 1;
-      totEl.textContent = list.length;
-      vid.play().catch(() => {});
+    function toggle(card){
+      const v = card.querySelector('.vt-vid');
+      if (!v) return;
+      if (v.paused){
+        /* only one story talks at a time */
+        document.querySelectorAll('.vt-vid').forEach(o => { if (o !== v) o.pause(); });
+        v.muted = false;
+        v.play().catch(() => {});
+      } else {
+        v.pause();
+      }
     }
 
-    function open(card){
-      const grid = card.closest('.vt-grid');
-      list = grid ? Array.prototype.slice.call(grid.querySelectorAll('.vt-card')) : [card];
-      document.querySelectorAll('.vt-vid').forEach(v => v.pause());
-      document.body.classList.add('vt-lock');
-      if (lenis) lenis.stop();
-      lb.classList.add('open');
-      requestAnimationFrame(() => lb.classList.add('show'));
-      show(list.indexOf(card));
-      btnX.focus();
-    }
-
-    function close(){
-      lb.classList.remove('show');
-      vid.pause();
-      document.body.classList.remove('vt-lock');
-      if (lenis) lenis.start();
-      setTimeout(() => {
-        lb.classList.remove('open');
-        vid.removeAttribute('src');
-        vid.load();
-        idx = -1;
-      }, 420);
-    }
+    vids.forEach(v => {
+      const card = v.closest('.vt-card');
+      if (!card) return;
+      v.addEventListener('play',  () => card.classList.add('playing'));
+      v.addEventListener('pause', () => card.classList.remove('playing'));
+      v.addEventListener('ended', () => { card.classList.remove('playing'); v.currentTime = 0; });
+    });
 
     document.addEventListener('click', e => {
       const card = e.target.closest && e.target.closest('.vt-card');
-      if (card) open(card);
+      if (card) toggle(card);
     });
 
     document.addEventListener('keydown', e => {
       const card = e.target.closest && e.target.closest('.vt-card');
-      if (card && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); open(card); return; }
-      if (!lb.classList.contains('open')) return;
-      if (e.key === 'Escape')     close();
-      if (e.key === 'ArrowLeft')  show(idx - 1);
-      if (e.key === 'ArrowRight') show(idx + 1);
+      if (card && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); toggle(card); }
     });
-
-    btnX.addEventListener('click', close);
-    btnPrev.addEventListener('click', () => show(idx - 1));
-    btnNext.addEventListener('click', () => show(idx + 1));
-    lb.addEventListener('click', e => { if (e.target === lb) close(); });
   })();
 
   /* ============================================================
