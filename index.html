@@ -304,17 +304,21 @@ h1 em,h2 em{
 
 .vt-vid{
   position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 24%;
-  z-index:1;display:block;background:var(--panel);
+  z-index:1;display:block;background:var(--panel);pointer-events:none;
   filter:grayscale(1) contrast(1.06);
   transition:filter .6s ease,transform .9s cubic-bezier(.2,.7,.2,1);
 }
-.vt-card:hover .vt-vid,.vt-card:focus-visible .vt-vid{filter:grayscale(0) contrast(1);transform:scale(1.045)}
+@media (hover:hover){
+  .vt-card:hover .vt-vid{filter:grayscale(0) contrast(1);transform:scale(1.045)}
+}
+.vt-card:focus-visible .vt-vid{filter:grayscale(0) contrast(1);transform:scale(1.045)}
 
 .vt-chip{
   display:none;
 }
 
 .vt-play{
+  pointer-events:none;
   position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);z-index:4;
   width:66px;height:66px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
@@ -365,8 +369,15 @@ h1 em,h2 em{
 /* ---- playing state: the button steps out of the way, colour comes up ---- */
 .vt-card.playing .vt-vid{filter:none;transform:none}
 .vt-card.playing .vt-play{opacity:0;transform:translate(-50%,-50%) scale(.92)}
-.vt-card.playing:hover .vt-play,
+@media (hover:hover){
+  .vt-card.playing:hover .vt-play{opacity:1;transform:translate(-50%,-50%) scale(1)}
+}
 .vt-card.playing:focus-visible .vt-play{opacity:1;transform:translate(-50%,-50%) scale(1)}
+@media (hover:none){
+  .vt-card.playing .vt-play{opacity:1;transform:translate(-50%,-50%) scale(1)}
+  .vt-card:hover .vt-frame{transform:none;box-shadow:none}
+  .vt-card:hover::before{opacity:0}
+}
 .vt-card.playing .vt-play::before{animation:none;opacity:0}
 .vt-play .ic-pause{display:none}
 .vt-card.playing .vt-play .ic-play{display:none}
@@ -1156,19 +1167,19 @@ body.preload .world .hero .rv{opacity:0!important;transform:translateY(28px)!imp
       <div class="vt-grid">
         <div class="vt-card rv" role="button" tabindex="0" data-src="testimonials/story-1.mp4">
           <div class="vt-frame">
-            <video class="vt-vid" src="testimonials/story-1.mp4" poster="testimonials/story-1.jpg" muted playsinline preload="metadata" disablepictureinpicture controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
+            <video class="vt-vid" src="testimonials/story-1.mp4" poster="testimonials/story-1.jpg" muted playsinline webkit-playsinline preload="metadata" disablepictureinpicture controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
             <span class="vt-play" aria-hidden="true"><svg class="ic-play" width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg><svg class="ic-pause" width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M7 5h3.4v14H7zM13.6 5H17v14h-3.4z"/></svg></span>
           </div>
         </div>
         <div class="vt-card rv d1" role="button" tabindex="0" data-src="testimonials/story-2.mp4">
           <div class="vt-frame">
-            <video class="vt-vid" src="testimonials/story-2.mp4" poster="testimonials/story-2.jpg" muted playsinline preload="metadata" disablepictureinpicture controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
+            <video class="vt-vid" src="testimonials/story-2.mp4" poster="testimonials/story-2.jpg" muted playsinline webkit-playsinline preload="metadata" disablepictureinpicture controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
             <span class="vt-play" aria-hidden="true"><svg class="ic-play" width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg><svg class="ic-pause" width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M7 5h3.4v14H7zM13.6 5H17v14h-3.4z"/></svg></span>
           </div>
         </div>
         <div class="vt-card rv d2" role="button" tabindex="0" data-src="testimonials/story-3.mp4">
           <div class="vt-frame">
-            <video class="vt-vid" src="testimonials/story-3.mp4" poster="testimonials/story-3.jpg" muted playsinline preload="metadata" disablepictureinpicture controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
+            <video class="vt-vid" src="testimonials/story-3.mp4" poster="testimonials/story-3.jpg" muted playsinline webkit-playsinline preload="metadata" disablepictureinpicture controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
             <span class="vt-play" aria-hidden="true"><svg class="ic-play" width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg><svg class="ic-pause" width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M7 5h3.4v14H7zM13.6 5H17v14h-3.4z"/></svg></span>
           </div>
         </div>
@@ -1553,19 +1564,19 @@ body.preload .world .hero .rv{opacity:0!important;transform:translateY(28px)!imp
         <div class="vt-grid">
           <div class="vt-card rv" role="button" tabindex="0" data-src="testimonials/story-1.mp4">
             <div class="vt-frame">
-              <video class="vt-vid" src="testimonials/story-1.mp4" poster="testimonials/story-1.jpg" muted playsinline preload="metadata" disablepictureinpicture controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
+              <video class="vt-vid" src="testimonials/story-1.mp4" poster="testimonials/story-1.jpg" muted playsinline webkit-playsinline preload="metadata" disablepictureinpicture controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
               <span class="vt-play" aria-hidden="true"><svg class="ic-play" width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg><svg class="ic-pause" width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M7 5h3.4v14H7zM13.6 5H17v14h-3.4z"/></svg></span>
             </div>
           </div>
           <div class="vt-card rv d1" role="button" tabindex="0" data-src="testimonials/story-2.mp4">
             <div class="vt-frame">
-              <video class="vt-vid" src="testimonials/story-2.mp4" poster="testimonials/story-2.jpg" muted playsinline preload="metadata" disablepictureinpicture controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
+              <video class="vt-vid" src="testimonials/story-2.mp4" poster="testimonials/story-2.jpg" muted playsinline webkit-playsinline preload="metadata" disablepictureinpicture controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
               <span class="vt-play" aria-hidden="true"><svg class="ic-play" width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg><svg class="ic-pause" width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M7 5h3.4v14H7zM13.6 5H17v14h-3.4z"/></svg></span>
             </div>
           </div>
           <div class="vt-card rv d2" role="button" tabindex="0" data-src="testimonials/story-3.mp4">
             <div class="vt-frame">
-              <video class="vt-vid" src="testimonials/story-3.mp4" poster="testimonials/story-3.jpg" muted playsinline preload="metadata" disablepictureinpicture controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
+              <video class="vt-vid" src="testimonials/story-3.mp4" poster="testimonials/story-3.jpg" muted playsinline webkit-playsinline preload="metadata" disablepictureinpicture controlslist="nodownload noplaybackrate noremoteplayback" aria-hidden="true"></video>
               <span class="vt-play" aria-hidden="true"><svg class="ic-play" width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg><svg class="ic-pause" width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M7 5h3.4v14H7zM13.6 5H17v14h-3.4z"/></svg></span>
             </div>
           </div>
@@ -2185,14 +2196,13 @@ const Smoke = (() => {
       v.addEventListener('ended', () => { card.classList.remove('playing'); v.currentTime = 0; });
     });
 
-    document.addEventListener('click', e => {
-      const card = e.target.closest && e.target.closest('.vt-card');
-      if (card) toggle(card);
-    });
-
-    document.addEventListener('keydown', e => {
-      const card = e.target.closest && e.target.closest('.vt-card');
-      if (card && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); toggle(card); }
+    /* bound per card, not delegated to document: iOS Safari does not
+       reliably bubble clicks from non-interactive elements */
+    document.querySelectorAll('.vt-card').forEach(card => {
+      card.addEventListener('click', e => { e.preventDefault(); toggle(card); });
+      card.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggle(card); }
+      });
     });
   })();
 
